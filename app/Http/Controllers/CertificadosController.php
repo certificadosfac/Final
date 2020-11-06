@@ -4,14 +4,29 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
+use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Html;
 
 class CertificadosController extends Controller
 {
     public function download()
     {
-        $pdf = app('dompdf.wrapper');
-        $pdf->loadHTML('<h1>Styde.net</h1>');
+        $data = [
+            'titulo' => 'Styde.net'
+        ];
     
-        return $pdf->download('mi-archivo.pdf');
+        $pdf = \PDF::loadView('pdf/invoice', $data);
+    
+        return $pdf->download('archivo.pdf');
+    }
+
+    public function getData() 
+    {
+        $data =  [
+            'quantity'      => '1' ,
+            'description'   => 'some ramdom text',
+            'price'   => '500',
+            'total'     => '500'
+        ];
+        return $data;
     }
 }
