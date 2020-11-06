@@ -28,13 +28,13 @@
 <div class="row" style="margin-left: 80px; margin-right: 80px; margin-top: 30px;">
 	<div class="col-md-4 text-center">
 		<div class="card" style="width: auto;">
-		  <img src=" {{ URL::to('/img/rut.jpg') }}" class="card-img-top">
+		  <img src=" {{ URL::to('/img/Unidad_laboral.png') }}" class="card-img-top">
 		  <div class="card-body">
 		  	<form method="get" action="{{ route('download') }}">
 			  @csrf
-				<h5 class="card-title">Certificado de tiempos</h5>
-				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-				<button type="submit" class="btn btn-dark">Go somewhere</button>
+				<h5 class="card-title">Certificacion unidad laboral actual</h5>
+				<p class="card-text">Obtenga aquí su certificado de unidad laboral actual</p>
+				<button type="submit" class="btn btn-dark">Solicitar</button>
 			</form>
 		  </div>
 		</div>
@@ -45,7 +45,7 @@
 		  <div class="card-body">
 		    <h5 class="card-title">Certificado de tiempos</h5>
 		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		    <a href="#" class="btn btn-dark">Go somewhere</a>
+		    <a href="#" class="btn btn-dark">Solicitar</a>
 		  </div>
 		</div>
 	</div>
@@ -55,7 +55,7 @@
 		  <div class="card-body">
 		    <h5 class="card-title">Card title</h5>
 		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		    <a href="#" class="btn btn-dark">Go somewhere</a>
+		    <a href="#" class="btn btn-dark">Solicitar</a>
 		  </div>
 		</div>
 	</div>	
