@@ -9,7 +9,7 @@
       .escudo{
         width: 80px; 
         height: 80px;
-        
+        margin-top: -2%;        
       }
       .img_firma{
         width: 350px; 
@@ -51,13 +51,14 @@
         width:60%;
         height:380px;
         margin-left: -40%;
+        margin-top : -6%;
       }
 
       .lateral{
         writing-mode: vertical-lr;
         transform: rotate(270deg);
         width:800%;
-        margin-top: 27%;
+        margin-top: 12%;
         margin-left: -395%;
         font-size: 12px;
 
@@ -67,7 +68,7 @@
         writing-mode: vertical-lr;
         transform: rotate(270deg);
         font-size: 11px;
-        margin-top: -29%;
+        margin-top: -38%;
         width:700%;
         margin-left: -310%;
       }
@@ -99,7 +100,7 @@
         </td>
         <td class="td2">         
           <div>
-              <h5 class="h5titulo">
+              <h5 class="h5titulo" style="margin-top: -3%;">
               REPUBLICA DE COLOMBIA <br>
               MINISTERIO DE DEFENSA NACIONAL
               </h5>
@@ -107,9 +108,9 @@
           <div class="divescudo">    
             <img class= "escudo" src="{{$base64Logo}}" alt="Logo" />
           </div>
-          <h5>FUERZA AEREA COLOMBIANA</h5>
+          <h5 style="margin-top: 2px;">FUERZA AEREA COLOMBIANA</h5>
           <br>
-          <h5>CERTIFICACION UNIDAD LABORAL ACTUAL</h5>
+          <h5 style="margin-top: -1%;">CERTIFICACION UNIDAD LABORAL ACTUAL</h5>
           <br>
           <p>
           EL (LA) SUSCRITO(A) DIRECTOR DE PERSONAL DIPER de la (el) FUERZA AEREA

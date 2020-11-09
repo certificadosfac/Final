@@ -28,8 +28,8 @@ class CertificadosController extends Controller
         $date = date('Y-m-d');
         $invoice = "2222";
         $view =  \View::make('pdf.unidad_laboral', compact('data', 'base64Firma', 'base64Logo','base64Code'))->render();
-        $pdf = \App::make('dompdf.wrapper');
-        $pdf->loadHTML($view);
+        $pdf = \App::make('dompdf.wrapper');       
+        $pdf->loadHTML($view)->setPaper('letter');
         return $pdf->download('archivo.pdf');
     }
     public function getData() 
