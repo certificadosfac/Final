@@ -23,4 +23,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 
-Route::get('/download', [CertificadosController::class, 'download'])->name('download');
+Route::post('/download', [CertificadosController::class, 'download'])->name('download');

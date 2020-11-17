@@ -15,7 +15,7 @@
         width: 350px; 
         height: 90px;
       }
-      h5{
+      h5, h4{
         text-align: center;        
       }
 
@@ -37,7 +37,7 @@
       }
       .divFirma{
         text-align: center;
-        margin-top: 40%;  
+        margin-top: 10%;  
       }
       .td1{
         width:40px;
@@ -77,12 +77,8 @@
 
       .texto{
         margin-left:11%; 
-        text-align: justify;      
-      }
-
-      .obs{
-        margin-left:11%;
         text-align: justify;
+        font-size: 15px;      
       }
 
       .lateralFirma{
@@ -106,14 +102,49 @@
       }
 
       .img_P3{
-        width:150px;
-        height:120px;
+        width:65%;
+        height:80px;
       }
 
       .containerImgPie{
-        margin-left: 10%;
-        margin-top: 4%;
-      }      
+        margin-left: 2%;
+        margin-top: 4.4%;
+      }
+      
+      th, .td1 {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+
+      .table1{
+        border: 1px solid black;
+        border-collapse: collapse;       
+        width:76.5%;
+      }
+
+      .thSinBorde{
+        border-left-style: none;
+      }
+
+      .thSinBorde1{
+        border-right-style: none;
+      }
+
+      .nota{
+        font-size: 10px;
+        text-align: justify;
+      }
+
+      .expide{
+        margin-left:11%;
+      }
+
+      .generado{
+        font-size: 9px;
+        color:#CACBCB;
+        margin-left:11%;
+        margin-top:6%;
+      }
 
     </style>
     
@@ -139,47 +170,66 @@
           <h5 style="margin-top: -10%;"> FUERZA AEREA COLOMBIANA</h5>
           <h5 style="margin-top: -20%;"></h5>
           <br>
-          <h5 style="margin-top: -6%;">CERTIFICACION UNIDAD LABORAL ACTUAL</h5>
+          <h5 style="margin-top: -8%;">EL (LA) SUSCRITO(A) DIRECTOR DE PERSONBAL DIPER</h5>
           <br>
+          <h4 style="margin-top: -4.5%;">HACE CONSTAR</h4>
           <p class="texto">
-          EL (LA) SUSCRITO(A) DIRECTOR DE PERSONAL DIPER de la (el) FUERZA AEREA
-          COLOMBIANA, hace constar que una vez verificada la base de datos del Sistema de
-          Información para la Administración del Talento Humano (SIATH), certifica que el(la)
-          Señor(a)(ita) Civil ASD2 VALIENTE PAIPA OLGA CONSTANZA identificado con cc.
-          52097124 expedida en BogotÁ, distrito capital (Cundinamarca), se escalafonó en la (el)
-          FUERZA AEREA COLOMBIANA como Civil el 02 Enero 2002, mediante Orden Administrativa
-          De Personal Fac No. 025 del 31 Diciembre 2001, registra como la última unidad laborada en
-          el lapso 26 Marzo 2018 a la fecha, en el (la) CDO-FAC.JEMFA.CAF.JETIC.DIASI
-          SUBDIRECCION DESARROLLO DE SOFTWARE, ubicado en la ciudad de BogotÁ, Distrito
-          Capital (Cundinamarca), ostentando el cargo de Asesor Sistemas. 
+            Que el(la) Señor(a)(ita) CIVIL TA21 ----------------------------, identificado (a) con CC No. -------------,
+            y código militar ------------, quien actualmente es orgánico en el (la) CDO-FAC.JEMFA.CAF.JETIC 
+            OFICNA SOPORTE TECNICO le figura la sigueinte información:
           </p>
-          <br>          
+                    
           </div>
-          <div>          
-            <p class="obs">Se expide la presente constancia. Dada a los 01 días del mes de Agosto de 2020 en la ciudad
-              de Bogotá D.C.
-            </p>
+          <div style="margin-left: 11%;">          
+            <h4 style="text-align: center;">Fecha corte: {{substr($datosGenerales['fechaCorte'],0,10)}}
+            </h4>
+            <table class="table1 center">
+              <tr>
+              <th>NOVEDAD</th>
+              <th>DISPOSISION</th>
+              <th>FECHAS</th>
+              <th>TOTAL</th>
+              </tr>
+              <tr>
+              <th class="thSinBorde1"></th>
+              <th class="thSinBorde"></th>
+              <th>DE &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; A</th>
+              <th>AA-MM-DD</th>
+              </tr>              
+              <tr>
+              <td class="td1"> &nbsp;</td> <td class="td1"> &nbsp; </td>
+              <td class="td1"> </td> <td class="td1"> </td>
+              </tr>              
+              <tr>
+              <td class="td1 thSinBorde1">&nbsp; </td> <td class="td1 thSinBorde thSinBorde1">&nbsp;</td>
+              <td class="td1 thSinBorde"> &nbsp; </td> <td class="td1">&nbsp; </td>
+              </tr>
+            </table>
+            <br>
+            <p class="nota">Nota: Este certificado no es válido para retiro, los datos aquí contenidos son los registrados en su historial laboral, para reconocimientos prestacionales deben ser avalados 
+            por la Dirección de Prestaciones Sociales, de acuerdo a las normas legales vigentes. Para efectos de asignación de retiro o pensión en el caso de tener tiempo de Alumno
+            se liquidará sin sobrepasar 2 años.</p>
           </div>
           <div>
           <p class="lateralFirma">Firmado digitalmente por: MINISTERIO DE DEFENSA NACIONAL <br>
           Organización: <br>
           Fecha firma : {{$datosGenerales['fechaActual']}}
-           <p>
+           <p>           
           </div>
-          <div class="divFirma">
-            <img class= "img_firma" src="{{$datosGenerales['firma']}}" alt="Logo" />
+          <br>
+          <p class="expide">Se expide en Bogotá D.C. al (los) 21 dias de mes de agosto de 2020</p>
+          <div class="divFirma">            
             <hr>
             <p class="frima">
-            CR HERRERA RODRIGUEZ JIMMY ALEXANDER
+            CR _________________________________________
             </p>
             <p class="frima">
             <strong>DIRECTOR DE PERSONAL DIPER FUERZA AEREA COLOMBIANA</strong>
             </p>
           </div>
-          <div class="containerImgPie">
-          <img class= "img_P1" src="{{$datosGenerales['firma']}}" alt="Logo" />
-          <img class= "img_P2" src="{{$datosGenerales['firma']}}" alt="Logo" />
-          <img class= "img_P3" src="{{$datosGenerales['firma']}}" alt="Logo" />
+          <p class="generado">Generado por: https://webapp.mindefensa.gov.co/,sUvLvQVkb9</p>
+          <div class="containerImgPie">          
+          <img class= "img_P3" src="{{$datosGenerales['fotoPie']}}" alt="Logo" />
           </div>        
           </td>          
         </tr>           
