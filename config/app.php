@@ -177,7 +177,11 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
+<<<<<<< HEAD
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+=======
+        Milon\Barcode\BarcodeServiceProvider::class,
+>>>>>>> ed9f0d058e347b68dc28ff567934aa8b360a8cc0
 
     ],
 
@@ -231,6 +235,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
+        'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
+        'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
 
     ],
 
