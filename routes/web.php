@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+Route::middleware(['auth:sanctum', 'verified'])->get('/certificados', function () {
     return view('certificados');
 })->name('certificados');
 
