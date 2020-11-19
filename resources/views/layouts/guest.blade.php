@@ -11,17 +11,17 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}" >
-        <link rel="stylesheet" type="text/css" href="{{asset('css/animate.css')}}" >
-        <link rel="stylesheet" type="text/css" href="{{asset('css/icomoon.css')}}" >
-        <link rel="stylesheet" type="text/css" href="{{asset('css/themify-icons.css')}}" >
-        <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.css')}}" >
-        <link rel="stylesheet" type="text/css" href="{{asset('css/magnific-popup.css')}}" >
-        <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap-datepicker.min.css')}}" >
-        <link rel="stylesheet" type="text/css" href="{{asset('css/owl.carousel.min.css')}}" >
-        <link rel="stylesheet" type="text/css" href="{{asset('css/owl.theme.default.min.css')}}" >
-        <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}" >
+        <link rel="stylesheet" href="{{ asset('css/log/css/app.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{asset('css/log/css/style.css')}}" >
+        <link rel="stylesheet" type="text/css" href="{{asset('css/log/css/animate.css')}}" >
+        <link rel="stylesheet" type="text/css" href="{{asset('css/log/css/icomoon.css')}}" >
+        <link rel="stylesheet" type="text/css" href="{{asset('css/log/css/themify-icons.css')}}" >
+        <link rel="stylesheet" type="text/css" href="{{asset('css/log/css/bootstrap.css')}}" >
+        <link rel="stylesheet" type="text/css" href="{{asset('css/log/css/magnific-popup.css')}}" >
+        <link rel="stylesheet" type="text/css" href="{{asset('css/log/css/bootstrap-datepicker.min.css')}}" >
+        <link rel="stylesheet" type="text/css" href="{{asset('css/log/css/owl.carousel.min.css')}}" >
+        <link rel="stylesheet" type="text/css" href="{{asset('css/log/css/owl.theme.default.min.css')}}" >
+        <link rel="stylesheet" type="text/css" href="{{asset('css/log/css/style.css')}}" >
         
 
         <!-- Scripts -->
