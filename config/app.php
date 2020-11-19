@@ -177,11 +177,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
-<<<<<<< HEAD
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
-=======
         Milon\Barcode\BarcodeServiceProvider::class,
->>>>>>> ed9f0d058e347b68dc28ff567934aa8b360a8cc0
 
     ],
 
