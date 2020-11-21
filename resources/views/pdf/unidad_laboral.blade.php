@@ -145,18 +145,17 @@
           EL (LA) SUSCRITO(A) DIRECTOR DE PERSONAL DIPER de la (el) FUERZA AEREA
           COLOMBIANA, hace constar que una vez verificada la base de datos del Sistema de
           Información para la Administración del Talento Humano (SIATH), certifica que el(la)
-          Señor(a)(ita) Civil ASD2 VALIENTE PAIPA OLGA CONSTANZA identificado con cc.
-          52097124 expedida en BogotÁ, distrito capital (Cundinamarca), se escalafonó en la (el)
-          FUERZA AEREA COLOMBIANA como Civil el 02 Enero 2002, mediante Orden Administrativa
+          Señor(a)(ita) Civil ASD2 {{$cargoData->apellidos_nombres}} identificado con cc.
+          {{$cargoData->cedula}} expedida en {{$cargoData->lugar_cedula}}, se escalafonó en la (el)
+          FUERZA AEREA COLOMBIANA como {{$cargoData->cargo}} el {{$cargoData->fecha_disp}}, mediante Orden Administrativa
           De Personal Fac No. 025 del 31 Diciembre 2001, registra como la última unidad laborada en
-          el lapso 26 Marzo 2018 a la fecha, en el (la) CDO-FAC.JEMFA.CAF.JETIC.DIASI
-          SUBDIRECCION DESARROLLO DE SOFTWARE, ubicado en la ciudad de BogotÁ, Distrito
-          Capital (Cundinamarca), ostentando el cargo de Asesor Sistemas. 
+          el lapso {{$cargoData->fecha_disp}} a la fecha, en el (la) {{$cargoData->unidad_laboral}}, ubicado en la ciudad de BogotÁ, Distrito
+          Capital (Cundinamarca), ostentando el cargo de {{$cargoData->cargo}}. 
           </p>
           <br>          
           </div>
           <div>          
-            <p class="obs">Se expide la presente constancia. Dada a los 01 días del mes de Agosto de 2020 en la ciudad
+            <p class="obs">Se expide la presente constancia. Dada a los {{$datosGenerales['fechaLetras']}} en la ciudad
               de Bogotá D.C.
             </p>
           </div>
