@@ -235,14 +235,37 @@ class CertificadosController extends Controller
     public function search_document(Request $request){
 
         try{ 
-
+            
             $token = $request->token;                                            
             $doc = LogDocuments::where('token',$token)->first();            
-            if ($doc) {
-                var_dump('Este certificado pertenece al documento: '.$doc->cedula);
+            if ($doc) { 
+                $response = array(
+                    'error' => '0',
+                    'msn' => 'Este certificado pertenece al documento: '.$doc->cedula
+                );        
+                echo json_encode($response);
+                exit;
+            }else{
+                $response = array(
+                    'error' => '1',
+                    'msn' => 'Documento no encontrado.'
+                );
+                
+                echo json_encode($response);                
+                exit;  
             }
+
+            echo json_encode($response);
+            exit;
+
         } catch(QueryException $ex){ 
-            dd($ex->getMessage());            
+            $response = array(
+                'error' => '1',
+                'msn' => 'Ocurrió un error en la consulta, comuníquese con el administrador del sistema'
+            ); 
+            
+            echo json_encode($response);
+            exit;            
         }      
     }
 }

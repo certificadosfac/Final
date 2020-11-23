@@ -25,3 +25,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::post('/download', [CertificadosController::class, 'download'])->name('download');
 Route::get('/search_document/{token}', [CertificadosController::class, 'search_document'])->name('search_document');
+Route::get('/search', function () {
+    return view('search');
+});
