@@ -56,7 +56,7 @@
         <div class="col-md-offset-5 col-md-6 contenido">
             <div class="form-login">
             <h4>Consultar documento</h4>
-            <input  onkeyup="onKeyUp(event)" type="text" id="search" name="search" class="form-control input-sm chat-input" placeholder="Buscar" />
+            <input onkeyup="onKeyUp(event)" type="text" id="search" name="search" class="form-control input-sm chat-input" placeholder="Buscar" focus/>
             </br> 
             </div>        
         </div>
@@ -66,6 +66,7 @@
 </body>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
+document.getElementById("search").focus();
   function onKeyUp(event) {
     var keycode = event.keyCode;
     var action = window.location.origin + '/search_document/' + $('input:text[name=search]').val()
