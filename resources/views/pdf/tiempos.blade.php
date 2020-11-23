@@ -107,7 +107,7 @@
       }
 
       .containerImgPie{
-        margin-left: 2%;
+        margin-left: 20%;
         margin-top: 4.4%;
       }
       
@@ -175,8 +175,7 @@
           <h4 style="margin-top: -4.5%;">HACE CONSTAR</h4>
           <p class="texto">
             Que el(la) Señor(a)(ita) CIVIL TA21 {{$dataTiempos->nombres_apellidos}}, identificado (a) con CC No. {{$dataTiempos->cedula}}
-            y código militar {{$dataTiempos->codigo_militar}}, quien actualmente es orgánico en el (la) CDO-FAC.JEMFA.CAF.JETIC 
-            OFICNA SOPORTE TECNICO le figura la sigueinte información:
+            y código militar {{$dataTiempos->codigo_militar}}, quien actualmente es orgánico en el (la) {{$dataTiempos->unidad_laboral}} le figura la sigueinte información:
           </p>
                     
           </div>
