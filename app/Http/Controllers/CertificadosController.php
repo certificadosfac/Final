@@ -10,6 +10,8 @@ use DNS1D;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use App\Models\LogDocuments;
+use Illuminate\Database\QueryException;
 
 class CertificadosController extends Controller
 {
@@ -26,8 +28,12 @@ class CertificadosController extends Controller
                 $mes = $date->format('m');
                 $fechaLetras = $date->format('d'). ' días del mes de '.$meses[$mes - 1]. ' de '. $date->format('Y');
 
-                //Id de documento
+                //Log documentos 
                 $idDocumento =  Str::random(32);
+                $log = new LogDocuments;
+                $log->token = $idDocumento;
+                $log->cedula = '1007059556';
+                $log->save();
 
                 //Obtener data
                 $cargoData = $this->getData($tipoCert);
@@ -62,8 +68,12 @@ class CertificadosController extends Controller
                 $mes = $date->format('m');
                 $fechaLetras = $date->format('d'). ' días del mes de '.$meses[$mes - 1]. ' de '. $date->format('Y');
 
-                //Id de documento
+                //Log documentos 
                 $idDocumento =  Str::random(32);
+                $log = new LogDocuments;
+                $log->token = $idDocumento;
+                $log->cedula = '1007059556';
+                $log->save();
 
                 $dateCorte = date_format($date, 'd-m-Y');
 
@@ -103,8 +113,12 @@ class CertificadosController extends Controller
                 //Obtener data
                 $data = $this->getData($tipoCert);
 
-                 //Id de documento
-                 $idDocumento =  Str::random(32);
+                 //Log documentos 
+                $idDocumento =  Str::random(32);
+                $log = new LogDocuments;
+                $log->token = $idDocumento;
+                $log->cedula = '1007059556';
+                $log->save();
                 
                 
                 //Cargar logo
@@ -144,8 +158,12 @@ class CertificadosController extends Controller
                 //Obtener data
                 $data = $this->getData($tipoCert);
                 
-                //Id de documento
+                //Log documentos 
                 $idDocumento =  Str::random(32);
+                $log = new LogDocuments;
+                $log->token = $idDocumento;
+                $log->cedula = '1007059556';
+                $log->save();
                 
                 //Cargar logo
                 $path = storage_path('app\img\Escudo_Fac.jpg');
@@ -212,6 +230,20 @@ class CertificadosController extends Controller
         }       
         
         return $data;
+    }
+
+    public function search_document(Request $request){
+
+        try{ 
+
+            $token = $request->token;                                            
+            $doc = LogDocuments::where('token',$token)->first();            
+            if ($doc) {
+                var_dump('Este certificado pertenece al documento: '.$doc->cedula);
+            }
+        } catch(QueryException $ex){ 
+            dd($ex->getMessage());            
+        }      
     }
 }
  
