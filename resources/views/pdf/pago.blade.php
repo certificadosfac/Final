@@ -103,7 +103,7 @@
       }
 
       .containerImgPie{
-        margin-left: 18%;
+        margin-left: 14%;
         margin-top: 1%;
       }
       

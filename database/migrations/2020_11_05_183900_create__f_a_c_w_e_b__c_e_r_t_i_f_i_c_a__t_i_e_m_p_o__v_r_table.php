@@ -21,7 +21,7 @@ class CreateFACWEBCERTIFICATIEMPOVRTable extends Migration
             $table->string('descripcion_dependencia',100);
             $table->double('cedula',12);
             $table->string('codigo_militar',12)->nullable();
-            $table->string('nombres-apellidos',61)->nullable();
+            $table->string('nombres_apellidos',61)->nullable();
             $table->string('grado',5)->nullable();
             $table->string('des_grado',50);
             $table->string('categoria',40);

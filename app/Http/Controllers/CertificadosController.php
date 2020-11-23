@@ -8,6 +8,7 @@ use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Html;
 use Illuminate\Support\Facades\Storage;
 use DNS1D;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class CertificadosController extends Controller
 {
@@ -20,9 +21,12 @@ class CertificadosController extends Controller
             case 'UL';
                 //Fecha actual            
                 $date = Carbon::now();
+                $meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+                $mes = $date->format('m');
+                $fechaLetras = $date->format('d'). ' días del mes de '.$meses[$mes - 1]. ' de '. $date->format('Y');
 
                 //Obtener data
-                $data = $this->getData();
+                $cargoData = $this->getData($tipoCert);
                 
                 //Cargar firma
                 $path = storage_path('app\img\img_firma.jpg');
@@ -45,10 +49,11 @@ class CertificadosController extends Controller
                     'firma'      => $base64Firma,
                     'logo'   => $base64Logo,
                     'codeqr'   => $base64Code,
-                    'fechaActual' => $date
+                    'fechaActual' => $date,
+                    'fechaLetras' => $fechaLetras
                 ];
-
-                $view =  \View::make('pdf.unidad_laboral', compact('datosGenerales'))->render();
+               
+                $view =  \View::make('pdf.unidad_laboral', compact('datosGenerales','cargoData'))->render();
 
                 break;
             
@@ -59,7 +64,7 @@ class CertificadosController extends Controller
                 $dateCorte = date_format($date, 'd-m-Y');
 
                 //Obtener data
-                $data = $this->getData();
+                $dataTiempos = $this->getData($tipoCert);
                
                
                 //Cargar logo
@@ -87,7 +92,7 @@ class CertificadosController extends Controller
                     'fotoPie' => $base64Pie
                 ];
 
-                $view =  \View::make('pdf.tiempos', compact('datosGenerales'))->render();            
+                $view =  \View::make('pdf.tiempos', compact('datosGenerales', 'dataTiempos'))->render();            
                 
             break;
 
@@ -96,7 +101,7 @@ class CertificadosController extends Controller
                 $date = Carbon::now();
 
                 //Obtener data
-                $data = $this->getData();
+                $data = $this->getData($tipoCert);
                 
                 
                 //Cargar logo
@@ -128,11 +133,18 @@ class CertificadosController extends Controller
             break;
 
             case 'CP';
+
+            $rules = [
+                'mes' => 'required',
+                'ano' => 'required',
+            ];
+            $this->validate($request, $rules);
+           
                 //Fecha actual            
                 $date = Carbon::now();
 
                 //Obtener data
-                $data = $this->getData();
+                $data = $this->getData($tipoCert);
                 
                 
                 //Cargar logo
@@ -169,14 +181,42 @@ class CertificadosController extends Controller
         $pdf->loadHTML($view)->setPaper('letter');
         return $pdf->download('archivo.pdf');
     }
-    public function getData() 
+    public function getData($tipoCert) 
     {
-        $data =  [
-            'quantity'      => '1' ,
-            'description'   => 'some ramdom text',
-            'price'   => '500',
-            'total'     => '500'
-        ];
+        switch($tipoCert){
+            case 'UL';
+               $data = DB::table('facweb_certifica_laboral_v1')               
+                ->where('cedula', '=', '1007059556')               
+                ->first();
+            break;
+            case 'CT';
+               $activo = DB::table('facweb_personal_v')
+               ->select('activo')               
+               ->where('cedula', '=', '1007059556')               
+               ->first();
+
+               $data = DB::table('facweb_certifica_tiempo_vr')               
+                ->where('cedula', '=', '1007059556')               
+                ->first();
+            break;
+            case 'CC';
+               $data = DB::table('facweb_certifica_laboral_v1')               
+                ->where('cedula', '=', '1007059556')               
+                ->first();
+            break;
+            case 'CP';
+               $descuentos = DB::table('facweb_haberes_descuentos')               
+                ->where('identificacion', '=', '1007059556')               
+                ->first();
+                $devengado = DB::table('facweb_haberes_devengado')               
+                ->where('cc', '=', '1007059556')               
+                ->first();
+                $data = DB::table('facweb_haberes_embargo')               
+                ->where('identificacion', '=', '1007059556')               
+                ->first();
+            break;            
+        }       
+        
         return $data;
     }
 }
