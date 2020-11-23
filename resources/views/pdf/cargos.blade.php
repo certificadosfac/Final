@@ -169,8 +169,8 @@
             <img class= "escudo" src="{{$datosGenerales['logo']}}" alt="Logo" />
           </div>
           <div>
-          <img class="imgCode" src="data:image/png;base64,{{DNS2D::getBarcodePNG('SzJ yAQV feIY Lqe9 9Gfz P7mm 63Y=', 'PDF417')}}" alt="Bacode" />
-          <p class="lateralCode">Identificador : 9SzJ yAQV feIY Lqe9 9Gfz P7mm 63Y= (Válido indefinidamente)<p>
+          <img class="imgCode" src="data:image/png;base64,{{DNS2D::getBarcodePNG($idDocumento, 'PDF417')}}" alt="Bacode" />
+          <p class="lateralCode">Identificador :{{ $idDocumento}} (Válido indefinidamente)<p>
           <h5 style="margin-top: -20%;"></h5>
           <br>
           <h5 style="margin-top: -9%;"> FUERZA AEREA COLOMBIANA</h5>

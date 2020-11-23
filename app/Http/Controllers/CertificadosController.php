@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use DNS1D;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class CertificadosController extends Controller
 {
@@ -25,6 +26,9 @@ class CertificadosController extends Controller
                 $mes = $date->format('m');
                 $fechaLetras = $date->format('d'). ' días del mes de '.$meses[$mes - 1]. ' de '. $date->format('Y');
 
+                //Id de documento
+                $idDocumento =  Str::random(32);
+
                 //Obtener data
                 $cargoData = $this->getData($tipoCert);
                 
@@ -38,28 +42,28 @@ class CertificadosController extends Controller
                 $data = file_get_contents($path);
                 $base64Logo = 'data:image/' . 'jpg' . ';base64,' . base64_encode($data);
 
-                //Cargar codigo QR
-                $path = storage_path('app\img\test.png');
-                $data = file_get_contents($path);
-                $base64Code = 'data:image/' . 'png' . ';base64,' . base64_encode($data);
-
                 \Storage::disk('public')->put('test.png',base64_decode(\DNS2D::getBarcodePNG("4", "PDF417")));
 
                 $datosGenerales = [
                     'firma'      => $base64Firma,
-                    'logo'   => $base64Logo,
-                    'codeqr'   => $base64Code,
+                    'logo'   => $base64Logo,                    
                     'fechaActual' => $date,
-                    'fechaLetras' => $fechaLetras
+                    'fechaLetras' => $fechaLetras,                    
                 ];
                
-                $view =  \View::make('pdf.unidad_laboral', compact('datosGenerales','cargoData'))->render();
+                $view =  \View::make('pdf.unidad_laboral', compact('datosGenerales','cargoData','idDocumento'))->render();
 
                 break;
             
             case 'CT';
                 //Fecha actual            
                 $date = Carbon::now();
+                $meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+                $mes = $date->format('m');
+                $fechaLetras = $date->format('d'). ' días del mes de '.$meses[$mes - 1]. ' de '. $date->format('Y');
+
+                //Id de documento
+                $idDocumento =  Str::random(32);
 
                 $dateCorte = date_format($date, 'd-m-Y');
 
@@ -77,22 +81,18 @@ class CertificadosController extends Controller
                 $data = file_get_contents($path);
                 $base64Pie = 'data:image/' . 'jpg' . ';base64,' . base64_encode($data);
 
-                //Cargar codigo QR
-                $path = storage_path('app\img\test.png');
-                $data = file_get_contents($path);
-                $base64Code = 'data:image/' . 'png' . ';base64,' . base64_encode($data);
-
+                
                 \Storage::disk('public')->put('test.png',base64_decode(\DNS2D::getBarcodePNG("4", "PDF417")));
 
                 $datosGenerales = [
-                    'logo'   => $base64Logo,
-                    'codeqr'   => $base64Code,
+                    'logo'   => $base64Logo,                    
                     'fechaActual' => $date,
                     'fechaCorte' => $dateCorte,
-                    'fotoPie' => $base64Pie
+                    'fotoPie' => $base64Pie,
+                    'fechaLetras' => $fechaLetras
                 ];
 
-                $view =  \View::make('pdf.tiempos', compact('datosGenerales', 'dataTiempos'))->render();            
+                $view =  \View::make('pdf.tiempos', compact('datosGenerales', 'dataTiempos','idDocumento'))->render();            
                 
             break;
 
@@ -102,6 +102,9 @@ class CertificadosController extends Controller
 
                 //Obtener data
                 $data = $this->getData($tipoCert);
+
+                 //Id de documento
+                 $idDocumento =  Str::random(32);
                 
                 
                 //Cargar logo
@@ -114,21 +117,16 @@ class CertificadosController extends Controller
                 $data = file_get_contents($path);
                 $base64Pie = 'data:image/' . 'jpg' . ';base64,' . base64_encode($data);
 
-                //Cargar codigo QR
-                $path = storage_path('app\img\test.png');
-                $data = file_get_contents($path);
-                $base64Code = 'data:image/' . 'png' . ';base64,' . base64_encode($data);
-
+                
                 \Storage::disk('public')->put('test.png',base64_decode(\DNS2D::getBarcodePNG("4", "PDF417")));
 
                 $datosGenerales = [                   
-                    'logo'   => $base64Logo,
-                    'codeqr'   => $base64Code,
+                    'logo'   => $base64Logo,                    
                     'fechaActual' => $date,
                     'fotoPie' => $base64Pie
                 ];
 
-                $view =  \View::make('pdf.cargos', compact('datosGenerales'))->render();            
+                $view =  \View::make('pdf.cargos', compact('datosGenerales','idDocumento'))->render();            
                 
             break;
 
@@ -146,6 +144,8 @@ class CertificadosController extends Controller
                 //Obtener data
                 $data = $this->getData($tipoCert);
                 
+                //Id de documento
+                $idDocumento =  Str::random(32);
                 
                 //Cargar logo
                 $path = storage_path('app\img\Escudo_Fac.jpg');
@@ -157,21 +157,15 @@ class CertificadosController extends Controller
                 $data = file_get_contents($path);
                 $base64Pie = 'data:image/' . 'jpg' . ';base64,' . base64_encode($data);
 
-                //Cargar codigo QR
-                $path = storage_path('app\img\test.png');
-                $data = file_get_contents($path);
-                $base64Code = 'data:image/' . 'png' . ';base64,' . base64_encode($data);
-
                 \Storage::disk('public')->put('test.png',base64_decode(\DNS2D::getBarcodePNG("4", "PDF417")));
 
                 $datosGenerales = [                   
                     'logo'   => $base64Logo,
-                    'codeqr'   => $base64Code,
                     'fechaActual' => $date,
                     'fotoPie' => $base64Pie
                 ];
 
-                $view =  \View::make('pdf.pago', compact('datosGenerales'))->render();            
+                $view =  \View::make('pdf.pago', compact('datosGenerales','idDocumento'))->render();            
                 
             break;
             
