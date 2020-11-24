@@ -204,8 +204,8 @@
           <br>
           <h4 style="margin-top: -4.5%;">HACE CONSTAR</h4>
           <p class="texto">
-          Que el(la) Señor(a) T- _______________________________________, identificado con CC No. _____________________
-          y código militar ________________ está en la nómina mensual activos del mes de Agosto del 2020 y le figura 
+          Que el(la) Señor(a) T- {{$dataPagos['devengado'][0]->nombres_apellidos}}, identificado con CC No. {{$dataPagos['devengado'][0]->cc}}
+          y código militar {{$dataPagos['devengado'][0]->codigo_militar}} está en la nómina mensual activos del mes de Agosto del 2020 y le figura 
           la siguiente información: 
           </p>                    
           </div>
@@ -221,87 +221,19 @@
               <th>INICIO</th>
               <th>TERMINO</th>
               <th style="border-right-style: solid">VALOR</th>
-              </tr>     
-              <tr>
-              <td>AUXCONECTDIGITAL</td> 
-              <td>49.5</td>
-              <td>$000.000.00</td>
-              <td>PREVISORASUB</td>
-              <td>1283</td>
-              <td>202012</td>
-              <td>202110</td>
-              <td>$000.000.0</td>
-              </tr>
-              <tr>
-              <td>AUXCONECTDIGITAL</td> 
-              <td>49.5</td>
-              <td>$000.000.00</td>
-              <td>PREVISORASUB</td>
-              <td>1283</td>
-              <td>202012</td>
-              <td>202110</td>
-              <td>$000.000.0</td>
-              </tr>
-              <tr>
-              <td>AUXCONECTDIGITAL</td> 
-              <td>49.5</td>
-              <td>$000.000.00</td>
-              <td>PREVISORASUB</td>
-              <td>1283</td>
-              <td>202012</td>
-              <td>202110</td>
-              <td>$000.000.0</td>
-              </tr>
-              <tr>
-              <td>AUXCONECTDIGITAL</td> 
-              <td>49.5</td>
-              <td>$000.000.00</td>
-              <td>PREVISORASUB</td>
-              <td>1283</td>
-              <td>202012</td>
-              <td>202110</td>
-              <td>$000.000.0</td>
-              </tr>
-              <tr>
-              <td>AUXCONECTDIGITAL</td> 
-              <td>49.5</td>
-              <td>$000.000.00</td>
-              <td>PREVISORASUB</td>
-              <td>1283</td>
-              <td>202012</td>
-              <td>202110</td>
-              <td>$000.000.0</td>
-              </tr>
-              <tr>
-              <td>AUXCONECTDIGITAL</td> 
-              <td>49.5</td>
-              <td>$000.000.00</td>
-              <td>PREVISORASUB</td>
-              <td>1283</td>
-              <td>202012</td>
-              <td>202110</td>
-              <td>$000.000.0</td>
-              </tr>
-              <tr>
-              <td>AUXCONECTDIGITAL</td> 
-              <td>49.5</td>
-              <td>$000.000.00</td>
-              <td>PREVISORASUB</td>
-              <td>1283</td>
-              <td>202012</td>
-              <td>202110</td>
-              <td>$000.000.0</td>
-              </tr>
-              <tr>
-              <td>AUXCONECTDIGITAL</td> 
-              <td>49.5</td>
-              <td>$000.000.00</td>
-              <td>PREVISORASUB</td>
-              <td>1283</td>
-              <td>202012</td>
-              <td>202110</td>
-              <td>$000.000.0</td>
-              </tr>
+              </tr> 
+              @foreach ($dataPagos['devengado'] as $dev)
+                <tr>
+                  <td>{{$dev->abreviatura}}</td> 
+                  <td>{{$dev->porcentaje}}</td>
+                  <td>${{$dev->valor_dev}}</td>
+                  <td>{{$dev->arb}}</td>
+                  <td>{{$dev->id_tipo_descuento}}</td>
+                  <td>{{$dev->desc_ini}}</td>
+                  <td>{{$dev->desc_ter}}</td>
+                  <td>${{$dev->valor_desc}}</td>
+                </tr>
+              @endforeach
             </table>             
             <br>
             <br>
@@ -357,13 +289,15 @@
                 <th style=" font-size: 11; border: 1px solid black;"><strong>INICIO</strong></th>
                 <th style=" font-size: 11; border: 1px solid black;"><strong>TERMINO</strong></th>
                 <th style=" font-size: 11; border: 1px solid black; border-right-style: solid;"><strong>VALOR</strong></th>
-              </tr> 
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
               </tr>
+              @foreach ($dataPagos['embargo'] as $des) 
+              <tr>
+                <td>{{$des->descripcion}}</td>
+                <td>{{$des->emb_inicio}}</td>
+                <td>{{$des->emb_termino}}</td>
+                <td>{{$des->emb_valor}}</td>
+              </tr>
+              @endforeach
             </table>
             </div>                    
           </div>
