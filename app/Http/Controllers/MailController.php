@@ -44,7 +44,7 @@ class MailController extends Controller
         $usuario->save();
         
        
-        //Mail::to($Iemail)->send(new EmailContacto($str));
+        Mail::to($Iemail)->send(new EmailContacto($str));
 
     
         return Redirect::back()->withErrors(['Usuario Creado Exitosamente Validar Correo']);

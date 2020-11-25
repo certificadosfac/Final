@@ -29,9 +29,9 @@
                                         
                                                     </div>
                                                 </div>
-                                                <!-- <label for="captcha">Captcha</label>
+                                                <label for="captcha">Captcha</label>
                                                     <div class="g-recaptcha" data-sitekey="6LesS_EZAAAAAJz6io-lt1-TbHxkL4KqcMPCe8_u"></div>
-                                                <br> -->
+                                                <br>
                                                 <button class="btn btn-primary btn-block" type="submit">Enviar Correo</button>
                                             </form>	
                                             <a class="btn btn-primary btn-block" href="{{ url('login')}}" style="color:white">Ingresar</a>
