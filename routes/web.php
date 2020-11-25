@@ -26,4 +26,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
+
+Route::get('/admin', function () {
+    return view('index');
+})->name('index');
+
 Route::post('/download', [CertificadosController::class, 'download'])->name('download');
