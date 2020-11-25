@@ -40,7 +40,7 @@
 		  	<form method="post" action="{{ route('download') }}">
 			  @csrf
 			  <input name="tipoCert" id="tipoCert" type="hidden" value="UL">
-				<h5 class="card-title">Certificacion unidad laboral actual</h5>
+				<h5 class="card-title">Certificacion unidad laboral</h5>
 				<p class="card-text">Obtenga aquí su certificado de unidad laboral actual</p>
 				<button type="submit" class="btn btn-dark">Solicitar</button>
 			</form>
@@ -100,17 +100,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-	    @if (count($errors) > 0)
-			<div class="alert alert-danger">
-				<p>Corrige los siguientes errores:</p>
-				<ul>
-					@foreach ($errors->all() as $message)
-						<li>{{ $message }}</li>
-					@endforeach
-				</ul>
-			</div>
-		@endif
+      <div class="modal-body">	    
 		<form method="post" action="{{ route('download') }}">
 			@csrf
 				<input name="tipoCert" id="tipoCert" type="hidden" value="CP">
