@@ -8,14 +8,11 @@ use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Html;
 use Illuminate\Support\Facades\Storage;
 use DNS1D;
 use Carbon\Carbon;
-<<<<<<< HEAD
-=======
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\LogDocuments;
 use Illuminate\Database\QueryException;
 use Redirect;
->>>>>>> c565139 (Validaciones de datos)
 
 class CertificadosController extends Controller
 {
@@ -30,15 +27,12 @@ class CertificadosController extends Controller
                 $date = Carbon::now();
 
                 //Obtener data
-<<<<<<< HEAD
                 $data = $this->getData();
-=======
                 $cargoData = $this->getData($tipoCert);
                 if(!$cargoData){
                     return Redirect::back()->withErrors(['No se encontraron datos para los parámetros especificados.']);
                 }
                 
->>>>>>> c565139 (Validaciones de datos)
                 
                 //Cargar firma
                 $path = storage_path('app\img\img_firma.jpg');
@@ -75,14 +69,11 @@ class CertificadosController extends Controller
                 $dateCorte = date_format($date, 'd-m-Y');
 
                 //Obtener data
-<<<<<<< HEAD
                 $data = $this->getData();
-=======
                 $dataTiempos = $this->getData($tipoCert);
                 if(!$dataTiempos){
                     return Redirect::back()->withErrors(['No se encontraron datos para los parámetros especificados.']);
                 }
->>>>>>> c565139 (Validaciones de datos)
                
                
                 //Cargar logo
@@ -117,11 +108,14 @@ class CertificadosController extends Controller
             case 'CC';
                 //Fecha actual            
                 $date = Carbon::now();
+                $meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+                $mes = $date->format('m');
+                $fechaLetras = $date->format('d'). ' días del mes de '.$meses[$mes - 1]. ' de '. $date->format('Y');
+              
+                
 
                 //Obtener data
-<<<<<<< HEAD
                 $data = $this->getData();
-=======
                 $dataCC = $this->getData($tipoCert);
                 if(!$dataCC){
                     return Redirect::back()->withErrors(['No se encontraron datos para los parámetros especificados.']);
@@ -134,7 +128,6 @@ class CertificadosController extends Controller
                 $log->token = $idDocumento;
                 $log->cedula = '1007059556';
                 $log->save();
->>>>>>> c565139 (Validaciones de datos)
                 
                 
                 //Cargar logo
@@ -158,18 +151,26 @@ class CertificadosController extends Controller
                     'logo'   => $base64Logo,
                     'codeqr'   => $base64Code,
                     'fechaActual' => $date,
-                    'fotoPie' => $base64Pie
+                    'fotoPie' => $base64Pie,
+                    'fechaLetras' => $fechaLetras
                 ];
 
                 $view =  \View::make('pdf.cargos', compact('datosGenerales'))->render();            
+                $view =  \View::make('pdf.cargos', compact('datosGenerales','idDocumento','dataCC'))->render();            
                 
             break;
 
             case 'CP';
                 //Fecha actual            
                 $date = Carbon::now();
+                $meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+                $mes = $date->format('m');
+                $fechaLetras = $date->format('d'). ' días del mes de '.$meses[$mes - 1]. ' de '. $date->format('Y');
+              
+
                 $ano = $request->input('ano');
                 $mes = $request->input('mes');
+                $mesLetra = $meses[$mes - 1];
 
                 //Obtener data
                 $data = $this->getData();
@@ -205,6 +206,8 @@ class CertificadosController extends Controller
 
                 $view =  \View::make('pdf.pago', compact('datosGenerales'))->render();            
                 $view =  \View::make('pdf.pago', compact('datosGenerales','idDocumento','dataPagos'))->render();            
+                $view =  \View::make('pdf.pago', compact('datosGenerales','idDocumento',
+                'dataPagos','fechaLetras','mesLetra','ano'))->render();            
                 
             break;
             
@@ -248,9 +251,13 @@ class CertificadosController extends Controller
 
             break;
             case 'CC';
-               $data = DB::table('facweb_certifica_laboral_v1')               
-                ->where('cedula', '=', '1007059556')               
-                ->first();
+               $data = DB::table('fac_certifica_cargos_v as c')
+               ->select('c.*',DB::raw("DATE_FORMAT(c.Fecha_Termino, '%d-%m-%Y') as date_fin"),
+               DB::raw("DATE_FORMAT(c.Fecha_Inicio, '%d-%m-%Y') as date_ini"))              
+                ->where('identificacion', '=', '1007059556')
+                ->orderBy('Fecha_Inicio', 'asc')               
+                ->get();
+                                
             break;
             case 'CP';
                $descuentos = DB::table('facweb_haberes_descuentos')               
@@ -271,9 +278,21 @@ class CertificadosController extends Controller
                 ->where('mes_nomina', '=', $mes)               
                 ->get();
                 //dd($devengado);
+                
+                $totaDevengado = 0;
+                $totalDescuentos = 0;
+                if (count($devengado) > 0) {
+                    foreach ($devengado as $value) {
+                        $totaDevengado += $value->valor_dev;
+                        $totalDescuentos += $value->valor_desc;
+                    }
+                }
+                
                 $data = array(
                     'embargo' => $embargo,
-                    'devengado' => $devengado
+                    'devengado' => $devengado,
+                    'totaDevengado' => $totaDevengado,
+                    'totalDescuentos' => $totalDescuentos
                 );
             break;            
         }       

@@ -205,7 +205,7 @@
           <h4 style="margin-top: -4.5%;">HACE CONSTAR</h4>
           <p class="texto">
           Que el(la) Señor(a) T- {{$dataPagos['devengado'][0]->nombres_apellidos}}, identificado con CC No. {{$dataPagos['devengado'][0]->cc}}
-          y código militar {{$dataPagos['devengado'][0]->codigo_militar}} está en la nómina mensual activos del mes de Agosto del 2020 y le figura 
+          y código militar {{$dataPagos['devengado'][0]->codigo_militar}} está en la nómina mensual activos del mes de {{$mesLetra}} del {{$ano}} y le figura 
           la siguiente información: 
           </p>                    
           </div>
@@ -242,13 +242,13 @@
             <table class="table1 center">
               <tr>
                 <td style=" font-size: 10;">
-                <strong>TOTAL DEVENGADOS: 0.000.000.00</strong>
+                <strong>TOTAL DEVENGADOS: {{$dataPagos['totaDevengado']}}</strong>
                 </td>
                 <td style=" font-size: 10;">
                 <strong>TOTAL DESCUENTOS: </strong>
                 </td>
                 <td style="text-align: left;">
-                  000.00
+                {{$dataPagos['totalDescuentos']}}
                 </td>
               </tr>
             </table> 
@@ -262,11 +262,11 @@
               </tr>              
               <tr>
                 <td style=" font-size: 11;">TOTAL DEVENGADO</td>
-                <td>$0,000,000.00</td>                
+                <td>${{$dataPagos['totaDevengado']}}</td>                
               </tr>
               <tr>
                 <td style=" font-size: 11;">TOTAL DESCUENTOS</td>
-                <td>$000,000.00</td>                
+                <td>${{$dataPagos['totalDescuentos']}}</td>                
               </tr>
               <tr>
                 <td style=" font-size: 11;">&nbsp;</td>
@@ -278,7 +278,7 @@
               </tr>
               <tr>
                 <td style=" font-size: 11;"><strong>NETO A PAGAR</strong></td>
-                <td><strong>$0,000,000.00</strong></td>                
+                <td><strong>${{$dataPagos['totaDevengado'] - $dataPagos['totalDescuentos']}}</strong></td>                
               </tr>
             </table>
             </div>
@@ -306,7 +306,7 @@
           012 y el código sustantivo del Trabajo, por lo cual no serán autorizados descuentos que afecten el mínimo 
           vital del funcionario, una vez efectuados los descuentos de Ley y Órdenes Judiciales.</p>
 
-          <p style="font-size: 13px;">Se expide en Bogotá D.C. al (los) 21 días del mes de Agosto del 2020</p>
+          <p style="font-size: 13px;">Se expide en Bogotá D.C. al (los) {{$fechaLetras}}</p>
 
           <div>
           <p class="lateralFirma">Firmado digitalmente por: MINISTERIO DE DEFENSA NACIONAL <br>
