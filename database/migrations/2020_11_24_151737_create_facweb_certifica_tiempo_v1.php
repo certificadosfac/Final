@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFACWEBCERTIFICATIEMPOVRTable extends Migration
+class CreateFacwebCertificaTiempoV1 extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateFACWEBCERTIFICATIEMPOVRTable extends Migration
      */
     public function up()
     {
-        Schema::create('FACWEB_CERTIFICA_TIEMPO_VR', function (Blueprint $table) {
-            $table->id();
-            $table->string('fecha_oap',11)->nullable();
-            $table->string('opa',19)->nullable();
-            $table->string('movito_retiro',240);
-            $table->string('descripcion_dependencia',100);
+        Schema::create('FACWEB_CERTIFICA_TIEMPO_V1', function (Blueprint $table) {
+            $table->id();            
             $table->double('cedula',12);
             $table->string('codigo_militar',12)->nullable();
             $table->string('nombres_apellidos',61)->nullable();
@@ -45,6 +41,6 @@ class CreateFACWEBCERTIFICATIEMPOVRTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('FACWEB_CERTIFICA_TIEMPO_VR');
+        Schema::dropIfExists('FACWEB_CERTIFICA_TIEMPO_V1');
     }
 }

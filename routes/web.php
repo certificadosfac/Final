@@ -29,3 +29,8 @@ Route::post('/download', [CertificadosController::class, 'download'])->name('dow
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('/search_document/{token}', [CertificadosController::class, 'search_document'])->name('search_document');
+Route::get('/search', function () {
+    return view('search');
+});

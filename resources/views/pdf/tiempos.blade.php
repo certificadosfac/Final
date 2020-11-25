@@ -107,7 +107,7 @@
       }
 
       .containerImgPie{
-        margin-left: 2%;
+        margin-left: 20%;
         margin-top: 4.4%;
       }
       
@@ -163,8 +163,8 @@
             <img class= "escudo" src="{{$datosGenerales['logo']}}" alt="Logo" />
           </div>
           <div>
-          <img class="imgCode" src="data:image/png;base64,{{DNS2D::getBarcodePNG('SzJ yAQV feIY Lqe9 9Gfz P7mm 63Y=', 'PDF417')}}" alt="Bacode" />
-          <p class="lateralCode">Identificador : 9SzJ yAQV feIY Lqe9 9Gfz P7mm 63Y= (Válido indefinidamente)<p>
+          <img class="imgCode" src="data:image/png;base64,{{DNS2D::getBarcodePNG($idDocumento, 'PDF417')}}" alt="Bacode" />
+          <p class="lateralCode">Identificador :{{$idDocumento}} (Válido indefinidamente)<p>
           <h5 style="margin-top: -20%;"></h5>
           <br>
           <h5 style="margin-top: -10%;"> FUERZA AEREA COLOMBIANA</h5>
@@ -174,9 +174,8 @@
           <br>
           <h4 style="margin-top: -4.5%;">HACE CONSTAR</h4>
           <p class="texto">
-            Que el(la) Señor(a)(ita) CIVIL TA21 ----------------------------, identificado (a) con CC No. -------------,
-            y código militar ------------, quien actualmente es orgánico en el (la) CDO-FAC.JEMFA.CAF.JETIC 
-            OFICNA SOPORTE TECNICO le figura la sigueinte información:
+            Que el(la) Señor(a)(ita) CIVIL TA21 {{$dataTiempos->nombres_apellidos}}, identificado (a) con CC No. {{$dataTiempos->cedula}}
+            y código militar {{$dataTiempos->codigo_militar}}, quien actualmente es orgánico en el (la) {{$dataTiempos->unidad_laboral}} le figura la sigueinte información:
           </p>
                     
           </div>
@@ -217,7 +216,7 @@
            <p>           
           </div>
           <br>
-          <p class="expide">Se expide en Bogotá D.C. al (los) 21 dias de mes de agosto de 2020</p>
+          <p class="expide">Se expide en Bogotá D.C. al (los) {{$datosGenerales['fechaLetras']}}</p>
           <div class="divFirma">            
             <hr>
             <p class="frima">
