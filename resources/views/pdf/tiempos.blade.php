@@ -146,6 +146,15 @@
         margin-top:6%;
       }
 
+      .textP{
+        font-size: 10px;
+      }
+      .textP2{
+        font-size: 9px;
+        text-align: center;
+      }
+
+
     </style>
     
   </head>
@@ -174,8 +183,8 @@
           <br>
           <h4 style="margin-top: -4.5%;">HACE CONSTAR</h4>
           <p class="texto">
-            Que el(la) Señor(a)(ita) CIVIL TA21 {{$dataTiempos->nombres_apellidos}}, identificado (a) con CC No. {{$dataTiempos->cedula}}
-            y código militar {{$dataTiempos->codigo_militar}}, quien actualmente es orgánico en el (la) {{$dataTiempos->unidad_laboral}} le figura la sigueinte información:
+            Que el(la) Señor(a)(ita) CIVIL TA21 {{$dataTiempos[0]['nombres_apellidos']}}, identificado (a) con CC No. {{$dataTiempos[0]['cedula']}}
+            y código militar {{$dataTiempos[0]['codigo_militar']}}, quien actualmente es orgánico en el (la) {{$dataTiempos[0]['unidad_laboral']}} le figura la sigueinte información:
           </p>
                     
           </div>
@@ -192,16 +201,20 @@
               <tr>
               <th class="thSinBorde1"></th>
               <th class="thSinBorde"></th>
-              <th>DE &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; A</th>
+              <th> &nbsp; &nbsp;DE  &nbsp; &nbsp; &nbsp;  A &nbsp; &nbsp;</th>
               <th>AA-MM-DD</th>
-              </tr>              
+              </tr>
+              @foreach ($dataTiempos as $dt)              
               <tr>
-              <td class="td1"> &nbsp;</td> <td class="td1"> &nbsp; </td>
-              <td class="td1"> </td> <td class="td1"> </td>
-              </tr>              
+                <td class="td1 textP">{{$dt['tipo_tiempo']}}</td>
+                <td class="td1 textP">{{$dt['tipo_disposicion']}} {{$dt['numero_disposicion']}} {{$dt['fecha_disposicion']}} </td>
+                <td class="td1 textP2">{{$dt['fecha_inicio']}} - {{$dt['fecha_termino']}} </td>
+                <td class="td1 textP" style="text-align: center;">{{$dt['subtotal']}}</td>
+              </tr>
+              @endforeach              
               <tr>
-              <td class="td1 thSinBorde1">&nbsp; </td> <td class="td1 thSinBorde thSinBorde1">&nbsp;</td>
-              <td class="td1 thSinBorde"> &nbsp; </td> <td class="td1">&nbsp; </td>
+              <td class="td1 thSinBorde1 textP" colspan="2">Total tiempos reconocidos en FUERZA AEREA COLOMBIANA </td> <td class="td1 thSinBorde thSinBorde1">&nbsp;</td>
+               <td class="td1" style="text-align: center; font-size: 11px;"><strong>{{$dataTiempos[0]['total']}}</strong></td>
               </tr>
             </table>
             <br>
