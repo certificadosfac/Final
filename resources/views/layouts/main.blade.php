@@ -9,14 +9,15 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Banamotos</title>
+  <title>Fuerza Aerea</title>
 
   <!-- Custom fonts for this template-->
-  <link href="{{ asset('/Dashboard/vendor/fontawesome-free/css/all.min.css') }}" type="text/css" rel="stylesheet">
+  <script src="{{ asset('/main/js/jquery-3.5.1.js') }}" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+  <link href="{{ asset('/main/vendor/fontawesome-free/css/all.min.css') }}" type="text/css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="{{ asset('/Dashboard/css/sb-admin-2.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('/main/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
   
   
@@ -32,11 +33,11 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/') }}">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/admin') }}" style="margin-top: 20px; margin-bottom: 20px;">
         <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+          <i class="fas fa-info-circle"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Banamotos</div>
+        <div class="sidebar-brand-text mx-3">Fuerza Aerea Colombiana</div>
       </a>
       <!-- Heading -->
       <div class="sidebar-heading">
@@ -45,66 +46,66 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
           <i class="fas fa-fw fa-cog"></i>
-          <span>Categorias</span>
+          <span>Certificado laboral</span>
         </a>
-        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Administrar</h6>
-            <a class="collapse-item" href="{{ url('Admin/Site/categorias/listar') }}">Listar</a>
-            <a class="collapse-item" href="{{ url('Admin/Site/categorias/crear') }}">Crear</a>
+            <a class="collapse-item" href="{{ url('/Admin/Laboral/listar') }}">Listar</a>
+            <a class="collapse-item" href="{{ url('/Admin/Laboral/crear') }}">Crear Logo - Firma</a>
           </div>
         </div>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
-          <span>Productos</span>
+          <span>Certificado Tiempo</span>
         </a>
-        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Administrar</h6>
-            <a class="collapse-item" href="{{ url('Admin/Site/Productos/listar') }}">Listar</a>
-            <a class="collapse-item" href="{{ url('Admin/Site/Productos/crear') }}">Crear</a>
+            <a class="collapse-item" href="{{ url('/Admin/Tiempo/listar') }}">Listar</a>
+            <a class="collapse-item" href="{{ url('/Admin/Tiempo/crear') }}">Crear Logo - Firma</a>
           </div>
         </div>
       </li>
       
       <li class="nav-item">
-        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="falsa" aria-controls="collapseOne">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTree" aria-expanded="falsa" aria-controls="collapseTree">
           <i class="fas fa-fw fa-cog"></i>
-          <span>Noticias</span>
+          <span>Certificado Cargos</span>
         </a>
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseTree" class="collapse " aria-labelledby="headingTree" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Administrar</h6>
-            <a class="collapse-item" href="{{ url('Admin/Site/Noticias/listar') }}">Listar</a>
-            <a class="collapse-item" href="{{ url('Admin/Site/Noticias/crear') }}">Crear</a>
+            <a class="collapse-item" href="{{ url('/Admin/Cargo/listar') }}">Listar</a>
+            <a class="collapse-item" href="{{ url('/Admin/Cargo/crear') }}">Crear Logo - Firma</a>
           </div>
         </div>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="falsa" aria-controls="collapseOne">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="falsa" aria-controls="collapseFour">
           <i class="fas fa-fw fa-cog"></i>
-          <span>Banners</span>
+          <span>Desprendible Pago</span>
         </a>
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Administrar</h6>
-            <a class="collapse-item" href="{{ url('Admin/Site/Banners/listar') }}">Listar</a>
-            <a class="collapse-item" href="{{ url('Admin/Site/Banners/crear') }}">Crear</a>
+            <a class="collapse-item" href="{{ url('/Admin/Pago/listar') }}">Listar</a>
+            <a class="collapse-item" href="{{ url('/Admin/Pago/crear') }}">Crear Logo - Firma</a>
           </div>
         </div>
       </li>
       
       <li class="nav-item">
-        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="falsa" aria-controls="collapseOne">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="falsa" aria-controls="collapseFive">
           <i class="fas fa-fw fa-cog"></i>
-          <span>Contactos</span>
+          <span>Usuarios</span>
         </a>
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{url('/contact')}}">Listar</a>
           </div>
@@ -147,31 +148,7 @@
 
                 </ul>
 
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
-                    <!-- Authentication Links -->
-                    @guest
-                       
-                    @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
+                
             </div>
         </div>
         </nav>
@@ -227,29 +204,23 @@
   </div>
   @yield('scriptsFotter')
   <!-- Bootstrap core JavaScript-->
-  <script src="{{ asset('/Dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('/main/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="{{ asset('/Dashboard/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+  <script src="{{ asset('/main/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="{{ asset('/Dashboard/js/sb-admin-2.min.js') }}"></script>
+  <script src="{{ asset('/main/js/sb-admin-2.min.js') }}"></script>
 
    <!-- Page level plugins -->
-   <script src="{{ asset('/Dashboard/vendor/chart/Chart.min.js') }}"></script>
+   <script src="{{ asset('/main/vendor/chart/Chart.min.js') }}"></script>
 
    <!-- Page level custom scripts -->
-   <script src="{{ asset('/Dashboard/js/demo/chart-area-demo.js') }}"></script>
-   <script src="{{ asset('/Dashboard/js/demo/chart-pie-demo.js') }}"></script>
-   <script src="{{asset('datePicker/js/bootstrap-datepicker.js')}}"></script>
-   <script>
-     $('#dp3').datepicker()
-      .on('changeDate', function(ev){
-        if (ev.date.valueOf() < startDate.valueOf()){
-          ....
-        }
-      });
-   </script>
+   <script src="{{ asset('/main/js/demo/chart-area-demo.js') }}"></script>
+   <script src="{{ asset('/main/js/demo/chart-pie-demo.js') }}"></script>
+  
+   
+
 </body>
 
 </html>
