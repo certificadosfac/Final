@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use App\Models\LogDocuments;
 use Illuminate\Database\QueryException;
 use Redirect;
+use ArrayObject;
 
 class CertificadosController extends Controller
 {
@@ -238,14 +239,61 @@ class CertificadosController extends Controller
                ->first();
 
                if ( $activo->activo == "NO") {
-                    $data = DB::table('facweb_certifica_tiempo_vr')               
+                    $dataTiempos = DB::table('facweb_certifica_tiempo_vr')               
                     ->where('cedula', '=', '1007059556')               
-                    ->first();
+                    ->get();
                }else{
-                    $data = DB::table('facweb_certifica_tiempo_v1')               
+                    $dataTiempos = DB::table('facweb_certifica_tiempo_v1')               
                     ->where('cedula', '=', '1007059556')               
-                    ->first();
+                    ->get();
                }
+
+            if ($dataTiempos) {                
+                $data = new ArrayObject();
+                $tAnoos = 0;
+                $tMeses = 0;
+                $tDias = 0;
+                foreach ($dataTiempos as $value) {
+
+                    $mesNumeroIni = $this->mesNumero(substr($value->fecha_inicio,3,-5)); 
+                    $mesNumeroFin = $this->mesNumero(substr($value->fecha_termino,3,-5)); 
+                    $fechaIni = Carbon::parse(substr($value->fecha_inicio,-4).'-'.$mesNumeroIni.'-'.substr($value->fecha_inicio,0,2));
+                    $fechaFin = Carbon::parse(substr($value->fecha_termino,-4).'-'.$mesNumeroFin.'-'.substr($value->fecha_termino,0,2));
+                    
+                    $intervalo = date_diff($fechaIni,$fechaFin);                    
+                    $subTotal = str_pad($intervalo->y, 2, "0", STR_PAD_LEFT). ' '. str_pad($intervalo->m, 2, "0", STR_PAD_LEFT). ' '. str_pad($intervalo->d, 2, "0", STR_PAD_LEFT);
+                    $tAnos =+ $intervalo->y;
+                    $tMeses =+ $intervalo->m;
+                    $tDias =+ $intervalo->d;
+
+                    if($tDias >= 30){
+                        $tDias = $tDias - 30;
+                        $tMeses++;                        
+                    }
+
+                    if($tMeses >= 12){
+                        $tMeses = $tMeses - 12;
+                        $tAnos++;                        
+                    }
+
+                    $data->append(
+                        array('tipo_tiempo' => $value->tipo_tiempo, 
+                            'tipo_disposicion' => $value->tipo_disposicion,
+                            'numero_disposicion' => $value->numero_disposicion,
+                            'fecha_disposicion' => $value->fecha_disposicion,
+                            'fecha_inicio' => substr($fechaIni,0,10),
+                            'fecha_termino' => substr($fechaFin,0,10),
+                            'subtotal' => $subTotal,
+                            'nombres_apellidos' => $value->nombres_apellidos,
+                            'cedula' => $value->cedula,
+                            'codigo_militar' => $value->codigo_militar,
+                            'unidad_laboral' => $value->unidad_laboral,
+                            'total' => str_pad($tAnos,2, "0", STR_PAD_LEFT).' '. str_pad($tMeses,2, "0", STR_PAD_LEFT).' '.str_pad($tDias,2, "0", STR_PAD_LEFT) 
+                        ));
+               }
+
+               
+            }
 
             break;
             case 'CC';
@@ -333,6 +381,50 @@ class CertificadosController extends Controller
             echo json_encode($response);
             exit;            
         }      
+    }
+
+    public function mesNumero($mes) {
+        $numero = 0;
+        switch($mes){
+            case'ENE';
+                $numero = '01';
+            break;
+            case 'FEB';
+                $numero = '02';
+            break;
+            case'MAR';
+                $numero = '03';
+            break;
+            case 'ABR';
+                $numero = '04';
+            break;
+            case'MAY';
+                $numero = '05';
+            break;
+            case 'JUN';
+                $numero = '06';
+            break;
+            case'JUL';
+                $numero = '07';
+            break;
+            case 'AGO';
+                $numero = '08';
+            break;
+            case'SEP';
+                $numero = '09';
+            break;
+            case 'OCT';
+                $numero = '10';
+            break;
+            case'NOV';
+                $numero = '11';
+            break;
+            case 'DIC';
+                $numero = '12';
+            break;                  
+
+        }
+        return $numero;
     }
 }
  
