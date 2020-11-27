@@ -8,6 +8,14 @@ use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Html;
 use Illuminate\Support\Facades\Storage;
 use DNS1D;
 use Carbon\Carbon;
+<<<<<<< HEAD
+=======
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use App\Models\LogDocuments;
+use Illuminate\Database\QueryException;
+use Redirect;
+>>>>>>> c565139 (Validaciones de datos)
 
 class CertificadosController extends Controller
 {
@@ -22,7 +30,15 @@ class CertificadosController extends Controller
                 $date = Carbon::now();
 
                 //Obtener data
+<<<<<<< HEAD
                 $data = $this->getData();
+=======
+                $cargoData = $this->getData($tipoCert);
+                if(!$cargoData){
+                    return Redirect::back()->withErrors(['No se encontraron datos para los parámetros especificados.']);
+                }
+                
+>>>>>>> c565139 (Validaciones de datos)
                 
                 //Cargar firma
                 $path = storage_path('app\img\img_firma.jpg');
@@ -59,7 +75,14 @@ class CertificadosController extends Controller
                 $dateCorte = date_format($date, 'd-m-Y');
 
                 //Obtener data
+<<<<<<< HEAD
                 $data = $this->getData();
+=======
+                $dataTiempos = $this->getData($tipoCert);
+                if(!$dataTiempos){
+                    return Redirect::back()->withErrors(['No se encontraron datos para los parámetros especificados.']);
+                }
+>>>>>>> c565139 (Validaciones de datos)
                
                
                 //Cargar logo
@@ -96,7 +119,22 @@ class CertificadosController extends Controller
                 $date = Carbon::now();
 
                 //Obtener data
+<<<<<<< HEAD
                 $data = $this->getData();
+=======
+                $dataCC = $this->getData($tipoCert);
+                if(!$dataCC){
+                    return Redirect::back()->withErrors(['No se encontraron datos para los parámetros especificados.']);
+                }
+                
+
+                 //Log documentos 
+                $idDocumento =  Str::random(32);
+                $log = new LogDocuments;
+                $log->token = $idDocumento;
+                $log->cedula = '1007059556';
+                $log->save();
+>>>>>>> c565139 (Validaciones de datos)
                 
                 
                 //Cargar logo
@@ -130,9 +168,15 @@ class CertificadosController extends Controller
             case 'CP';
                 //Fecha actual            
                 $date = Carbon::now();
+                $ano = $request->input('ano');
+                $mes = $request->input('mes');
 
                 //Obtener data
                 $data = $this->getData();
+                $dataPagos = $this->getData($tipoCert, $ano,$mes);                               
+                if( count($dataPagos['devengado']) == 0){
+                    return Redirect::back()->withErrors(['No se encontraron datos para los parámetros especificados.']);
+                }
                 
                 
                 //Cargar logo
@@ -160,6 +204,7 @@ class CertificadosController extends Controller
                 ];
 
                 $view =  \View::make('pdf.pago', compact('datosGenerales'))->render();            
+                $view =  \View::make('pdf.pago', compact('datosGenerales','idDocumento','dataPagos'))->render();            
                 
             break;
             
@@ -177,6 +222,62 @@ class CertificadosController extends Controller
             'price'   => '500',
             'total'     => '500'
         ];
+    public function getData($tipoCert, $ano = '', $mes = '') 
+    {
+        switch($tipoCert){
+            case 'UL';
+               $data = DB::table('facweb_certifica_laboral_v1')               
+                ->where('cedula', '=', '1007059556')               
+                ->first();
+            break;
+            case 'CT';
+               $activo = DB::table('facweb_personal_v')
+               ->select('activo')               
+               ->where('cedula', '=', '1007059556')               
+               ->first();
+
+               if ( $activo->activo == "NO") {
+                    $data = DB::table('facweb_certifica_tiempo_vr')               
+                    ->where('cedula', '=', '1007059556')               
+                    ->first();
+               }else{
+                    $data = DB::table('facweb_certifica_tiempo_v1')               
+                    ->where('cedula', '=', '1007059556')               
+                    ->first();
+               }
+
+            break;
+            case 'CC';
+               $data = DB::table('facweb_certifica_laboral_v1')               
+                ->where('cedula', '=', '1007059556')               
+                ->first();
+            break;
+            case 'CP';
+               $descuentos = DB::table('facweb_haberes_descuentos')               
+                ->where('identificacion', '=', '1007059556')               
+                ->get();
+                $devengado = DB::table('facweb_haberes_devengado as dev')                
+                ->join('facweb_haberes_descuentos as des', 'dev.cc', '=', 'des.identificacion')
+                ->select('dev.abreviatura','dev.porcentaje','dev.valor_dev',
+                'des.arb','des.id_tipo_descuento','des.desc_ini','des.desc_ter',
+                'des.valor_desc','dev.nombres_apellidos','dev.cc','dev.codigo_militar')             
+                ->where('dev.cc', '=', '1007059556')
+                ->where('dev.ano_nomina', '=', $ano)
+                ->where('dev.mes_nomina', '=', $mes)               
+                ->get();
+                $embargo = DB::table('facweb_haberes_embargo')               
+                ->where('identificacion', '=', '1007059556') 
+                ->where('ano_nomina', '=', $ano)
+                ->where('mes_nomina', '=', $mes)               
+                ->get();
+                //dd($devengado);
+                $data = array(
+                    'embargo' => $embargo,
+                    'devengado' => $devengado
+                );
+            break;            
+        }       
+        
         return $data;
     }
 

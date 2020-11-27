@@ -74,11 +74,11 @@
 			</form>
 		  </div>
 		</div>
-	</div>
+	</div>	 
 </div>
 
 <div class="row" style="margin-left: 80px; margin-right: 80px; margin-top: 30px;">
-<div class="col-md-4 text-center">
+	<div class="col-md-4 text-center">
 		<div class="card" style="width: auto;">
 		  <img src="{{ URL::to('/img/Desprendiblepago.png') }}" class="card-img-top" alt="...">
 		  <div class="card-body">
@@ -95,5 +95,11 @@
 </div>
 <br><br>
 </body>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript">
+	if({{$errors->any()}}){
+		swal("Error!", '{{$errors->first()}}', "info");
+	}	
+</script>
 </html>
 
