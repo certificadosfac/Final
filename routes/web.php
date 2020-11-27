@@ -75,3 +75,7 @@ Route::post('/admin/Pago/update/{id}', [PagoController::class, 'update'])->name(
 
 
 
+Route::get('/search_document/{token}', [CertificadosController::class, 'search_document'])->name('search_document');
+Route::get('/search', function () {
+    return view('search');
+});

@@ -179,5 +179,42 @@ class CertificadosController extends Controller
         ];
         return $data;
     }
+
+    public function search_document(Request $request){
+
+        try{ 
+            
+            $token = $request->token;                                            
+            $doc = LogDocuments::where('token',$token)->first();            
+            if ($doc) { 
+                $response = array(
+                    'error' => '0',
+                    'msn' => 'Este certificado pertenece al documento: '.$doc->cedula
+                );        
+                echo json_encode($response);
+                exit;
+            }else{
+                $response = array(
+                    'error' => '1',
+                    'msn' => 'Documento no encontrado.'
+                );
+                
+                echo json_encode($response);                
+                exit;  
+            }
+
+            echo json_encode($response);
+            exit;
+
+        } catch(QueryException $ex){ 
+            $response = array(
+                'error' => '1',
+                'msn' => 'Ocurrió un error en la consulta, comuníquese con el administrador del sistema'
+            ); 
+            
+            echo json_encode($response);
+            exit;            
+        }      
+    }
 }
  
