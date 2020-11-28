@@ -14,6 +14,7 @@
 									<div class="tab-content">
 										<div class="tab-content-inner active" data-content="signup">
 											<div class="col-md-6"><h3>Ingrese </div><div class="col-md-6"><img src="{{ url('images/logoF.png')}}" width="100%" height="80%"></h3></div>
+                                            
                                             <form method="POST" action="{{ route('login')}}" id="formulario-login">
                                                 {{  csrf_field() }}
                                                 <div class="row form-group"> 		

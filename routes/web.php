@@ -34,7 +34,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/admin', function () {
     return view('index');
-})->name('index');
+})->middleware('role');
 
 Route::post('/download', [CertificadosController::class, 'download'])->name('download');
 

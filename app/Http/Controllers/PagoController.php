@@ -10,15 +10,15 @@ class PagoController extends Controller
 
 {
 
-    //
+    
 
-    // public function __construct()
+    public function __construct()
 
-    // {
+    {
 
-    //     $this->middleware('auth');
+        $this->middleware('role');
 
-    // }
+    }
 
     
 
