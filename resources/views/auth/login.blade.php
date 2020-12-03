@@ -15,7 +15,7 @@
 										<div class="tab-content-inner active" data-content="signup">
 											<div class="col-md-6"><h3>Ingrese </div><div class="col-md-6"><img src="{{ url('images/logoF.png')}}" width="100%" height="80%"></h3></div>
                                             
-                                            <form method="POST" action="{{ route('login')}}" id="formulario-login">
+                                            <form onsubmit="return enviarMensaje()" method="POST" action="{{ route('login')}}" id="formulario-login">
                                                 {{  csrf_field() }}
                                                 <div class="row form-group"> 		
                                                 <div class="row form-group {{ $errors->has('email')? 'has-error' : ''}}">
@@ -33,15 +33,10 @@
                                                     {!! $errors->first('password','<span class="help-block">:message</span> ')!!} 
                                                 </div>
                                                 <label for="captcha">Captcha</label>
-                                                    {!! NoCaptcha::renderJs() !!}
-                                                    {!! NoCaptcha::display() !!}
-                                                    @if ($errors->has('g-recaptcha-response'))
-                                                        <span class="help-block">
-                                                            <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
-                                                        </span>
-                                                    @endif
+                                                    <div class="g-recaptcha" data-sitekey="6LesS_EZAAAAAJz6io-lt1-TbHxkL4KqcMPCe8_u"></div>
                                                 <br>
-                                                <button class="btn btn-primary btn-block">Acceder</button>
+												<button class="btn btn-primary btn-block" type="submit">Acceder</button>
+												<a class="btn btn-primary btn-block" href="{{ url('validate')}}" style="color:white">Validar</a>
 											</form>	
 										</div>		
 									</div>

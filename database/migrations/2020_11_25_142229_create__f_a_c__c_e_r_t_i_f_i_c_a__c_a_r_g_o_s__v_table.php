@@ -23,6 +23,8 @@ class CreateFACCERTIFICACARGOSVTable extends Migration
             $table->string('Dependencia_Cargo',100);
             $table->date('Fecha_Inicio');
             $table->date('Fecha_Termino')->nullable();
+            $table->string('Email',80);
+            $table->string('Email_Institucional',80);
 
         });
     }

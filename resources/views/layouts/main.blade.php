@@ -43,7 +43,7 @@
       <div class="sidebar-heading">
         Panel de Control
       </div>
-
+      
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -135,20 +135,16 @@
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
           <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                Panel de administracion
-            </a>
+            
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto">
-
-                </ul>
-
-                
+            <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                  <button type="submit " class="btn btn-primary btn-lg btn-block">Cerrar sesión.</button>
+            </form>
             </div>
         </div>
         </nav>

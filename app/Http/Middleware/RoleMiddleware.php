@@ -18,9 +18,9 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if ( isset($request)) {
-            return redirect('login');
-        }
+        // if ( isset($request)) {
+        //     return redirect('login');
+        // }
         
         if ($request->user()->role == 1) {
             return $next($request);

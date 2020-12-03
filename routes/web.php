@@ -7,6 +7,7 @@ use App\Http\Controllers\PagoController;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CertificadosController;
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +21,15 @@ use App\Http\Controllers\CertificadosController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('auth.validate');
 });
+
+
+Route::get('/validate', function () {
+    return view('auth.validate');
+});
+Route::post('/email', [MailController::class, 'register'])->name('email');
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/certificados', function () {
     return view('certificados');
@@ -37,6 +45,7 @@ Route::get('/admin', function () {
 })->middleware('role');
 
 Route::post('/download', [CertificadosController::class, 'download'])->name('download');
+
 
 //*************************Cargo***********************||
 Route::get('/Admin/Cargo/listar', [CargoController::class, 'list'])->name('Clist');
@@ -72,6 +81,9 @@ Route::post('/admin/Pago/create', [PagoController::class, 'save'])->name('Psave'
 Route::get('/admin/Pago/delete/{id}', [PagoController::class, 'delete'])->name('Pdelete');
 Route::get('/Admin/Pago/editar/{id}', [PagoController::class, 'edit'])->name('Pdelete');
 Route::post('/admin/Pago/update/{id}', [PagoController::class, 'update'])->name('Pdelete');
+
+//***************************************************
+Route::post('/validate', [MailController::class, 'register']);
 
 
 
