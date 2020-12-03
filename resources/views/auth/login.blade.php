@@ -1,48 +1,55 @@
 <x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
-
-        <x-jet-validation-errors class="mb-4" />
-
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
-        @endif
-
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <div>
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-            </div>
-
-            <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
-                    <input id="remember_me" type="checkbox" class="form-checkbox" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-jet-button class="ml-4">
-                    {{ __('Login') }}
-                </x-jet-button>
-            </div>
-        </form>
-    </x-jet-authentication-card>
+<header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(images/img_bg_2.jpg);height: 969px;">
+		<div class="overlay"></div>
+		<div class="gtco-container">
+			<div class="row">
+				<div class="col-md-12 col-md-offset-0 text-left">
+					<div class="row row-mt-15em">
+						<div class="col-md-7 mt-text animate-box" data-animate-effect="fadeInUp">
+							<h1>Certificados</h1> 
+						</div>
+						<div class="col-md-4 col-md-push-1 animate-box" data-animate-effect="fadeInRight">
+							<div class="form-wrap">
+								<div class="tab">
+									<div class="tab-content">
+										<div class="tab-content-inner active" data-content="signup">
+											<div class="col-md-6"><h3>Ingrese </div><div class="col-md-6"><img src="images/logoF.png" width="100%" height="80%"></h3></div>
+                                            <form method="POST" action="{{ route('login')}}" id="formulario-login">
+                                                {{  csrf_field() }}
+                                                <div class="row form-group"> 		
+                                                <div class="row form-group {{ $errors->has('email')? 'has-error' : ''}}">
+                                                    <div class="col-md-12">
+                                                        <label for="usuario">Usuario</label>
+                                                        <input type="email" id="email" name="email" class="form-control" placeholder="Ingrese su email">
+                                                        {!! $errors->first('email','<span class="help-block">:message</span> ')!!} 
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group {{ $errors->has('password')? 'has-error' : ''}}">
+                                                    <div class="col-md-12">
+                                                        <label for="password">Contraseña</label>
+                                                        <input type="password" id="password" name="password" class="form-control" placeholder="Ingrese Clave">
+                                                    </div>
+                                                    {!! $errors->first('password','<span class="help-block">:message</span> ')!!} 
+                                                </div>
+                                                <label for="captcha">Captcha</label>
+                                                    {!! NoCaptcha::renderJs() !!}
+                                                    {!! NoCaptcha::display() !!}
+                                                    @if ($errors->has('g-recaptcha-response'))
+                                                        <span class="help-block">
+                                                            <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                <br>
+                                                <button class="btn btn-primary btn-block">Acceder</button>
+											</form>	
+										</div>		
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+</header>
 </x-guest-layout>
