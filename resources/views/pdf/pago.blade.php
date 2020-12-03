@@ -193,8 +193,8 @@
             <img class= "escudo" src="{{$datosGenerales['logo']}}" alt="Logo" />
           </div>
           <div>
-          <img class="imgCode" src="data:image/png;base64,{{DNS2D::getBarcodePNG('SzJ yAQV feIY Lqe9 9Gfz P7mm 63Y=', 'PDF417')}}" alt="Bacode" />
-          <p class="lateralCode">Identificador : 9SzJ yAQV feIY Lqe9 9Gfz P7mm 63Y= (Válido indefinidamente)<p>
+          <img class="imgCode" src="data:image/png;base64,{{DNS2D::getBarcodePNG($idDocumento, 'PDF417')}}" alt="Bacode" />
+          <p class="lateralCode">Identificador : {{$idDocumento}} (Válido indefinidamente)<p>
           <h5 style="margin-top: -20%;"></h5>
           <br>
           <h5 style="margin-top: -9%;"> FUERZA AEREA COLOMBIANA</h5>
@@ -204,8 +204,8 @@
           <br>
           <h4 style="margin-top: -4.5%;">HACE CONSTAR</h4>
           <p class="texto">
-          Que el(la) Señor(a) T- _______________________________________, identificado con CC No. _____________________
-          y código militar ________________ está en la nómina mensual activos del mes de Agosto del 2020 y le figura 
+          Que el(la) Señor(a) T- {{$dataPagos['devengado'][0]->nombres_apellidos}}, identificado con CC No. {{$dataPagos['devengado'][0]->cc}}
+          y código militar {{$dataPagos['devengado'][0]->codigo_militar}} está en la nómina mensual activos del mes de {{$mesLetra}} del {{$ano}} y le figura 
           la siguiente información: 
           </p>                    
           </div>
@@ -221,87 +221,19 @@
               <th>INICIO</th>
               <th>TERMINO</th>
               <th style="border-right-style: solid">VALOR</th>
-              </tr>     
-              <tr>
-              <td>AUXCONECTDIGITAL</td> 
-              <td>49.5</td>
-              <td>$000.000.00</td>
-              <td>PREVISORASUB</td>
-              <td>1283</td>
-              <td>202012</td>
-              <td>202110</td>
-              <td>$000.000.0</td>
-              </tr>
-              <tr>
-              <td>AUXCONECTDIGITAL</td> 
-              <td>49.5</td>
-              <td>$000.000.00</td>
-              <td>PREVISORASUB</td>
-              <td>1283</td>
-              <td>202012</td>
-              <td>202110</td>
-              <td>$000.000.0</td>
-              </tr>
-              <tr>
-              <td>AUXCONECTDIGITAL</td> 
-              <td>49.5</td>
-              <td>$000.000.00</td>
-              <td>PREVISORASUB</td>
-              <td>1283</td>
-              <td>202012</td>
-              <td>202110</td>
-              <td>$000.000.0</td>
-              </tr>
-              <tr>
-              <td>AUXCONECTDIGITAL</td> 
-              <td>49.5</td>
-              <td>$000.000.00</td>
-              <td>PREVISORASUB</td>
-              <td>1283</td>
-              <td>202012</td>
-              <td>202110</td>
-              <td>$000.000.0</td>
-              </tr>
-              <tr>
-              <td>AUXCONECTDIGITAL</td> 
-              <td>49.5</td>
-              <td>$000.000.00</td>
-              <td>PREVISORASUB</td>
-              <td>1283</td>
-              <td>202012</td>
-              <td>202110</td>
-              <td>$000.000.0</td>
-              </tr>
-              <tr>
-              <td>AUXCONECTDIGITAL</td> 
-              <td>49.5</td>
-              <td>$000.000.00</td>
-              <td>PREVISORASUB</td>
-              <td>1283</td>
-              <td>202012</td>
-              <td>202110</td>
-              <td>$000.000.0</td>
-              </tr>
-              <tr>
-              <td>AUXCONECTDIGITAL</td> 
-              <td>49.5</td>
-              <td>$000.000.00</td>
-              <td>PREVISORASUB</td>
-              <td>1283</td>
-              <td>202012</td>
-              <td>202110</td>
-              <td>$000.000.0</td>
-              </tr>
-              <tr>
-              <td>AUXCONECTDIGITAL</td> 
-              <td>49.5</td>
-              <td>$000.000.00</td>
-              <td>PREVISORASUB</td>
-              <td>1283</td>
-              <td>202012</td>
-              <td>202110</td>
-              <td>$000.000.0</td>
-              </tr>
+              </tr> 
+              @foreach ($dataPagos['devengado'] as $dev)
+                <tr>
+                  <td>{{$dev->abreviatura}}</td> 
+                  <td>{{$dev->porcentaje}}</td>
+                  <td>${{$dev->valor_dev}}</td>
+                  <td>{{$dev->arb}}</td>
+                  <td>{{$dev->id_tipo_descuento}}</td>
+                  <td>{{$dev->desc_ini}}</td>
+                  <td>{{$dev->desc_ter}}</td>
+                  <td>${{$dev->valor_desc}}</td>
+                </tr>
+              @endforeach
             </table>             
             <br>
             <br>
@@ -310,13 +242,13 @@
             <table class="table1 center">
               <tr>
                 <td style=" font-size: 10;">
-                <strong>TOTAL DEVENGADOS: 0.000.000.00</strong>
+                <strong>TOTAL DEVENGADOS: {{$dataPagos['totaDevengado']}}</strong>
                 </td>
                 <td style=" font-size: 10;">
                 <strong>TOTAL DESCUENTOS: </strong>
                 </td>
                 <td style="text-align: left;">
-                  000.00
+                {{$dataPagos['totalDescuentos']}}
                 </td>
               </tr>
             </table> 
@@ -330,11 +262,11 @@
               </tr>              
               <tr>
                 <td style=" font-size: 11;">TOTAL DEVENGADO</td>
-                <td>$0,000,000.00</td>                
+                <td>${{$dataPagos['totaDevengado']}}</td>                
               </tr>
               <tr>
                 <td style=" font-size: 11;">TOTAL DESCUENTOS</td>
-                <td>$000,000.00</td>                
+                <td>${{$dataPagos['totalDescuentos']}}</td>                
               </tr>
               <tr>
                 <td style=" font-size: 11;">&nbsp;</td>
@@ -346,7 +278,7 @@
               </tr>
               <tr>
                 <td style=" font-size: 11;"><strong>NETO A PAGAR</strong></td>
-                <td><strong>$0,000,000.00</strong></td>                
+                <td><strong>${{$dataPagos['totaDevengado'] - $dataPagos['totalDescuentos']}}</strong></td>                
               </tr>
             </table>
             </div>
@@ -357,13 +289,15 @@
                 <th style=" font-size: 11; border: 1px solid black;"><strong>INICIO</strong></th>
                 <th style=" font-size: 11; border: 1px solid black;"><strong>TERMINO</strong></th>
                 <th style=" font-size: 11; border: 1px solid black; border-right-style: solid;"><strong>VALOR</strong></th>
-              </tr> 
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
               </tr>
+              @foreach ($dataPagos['embargo'] as $des) 
+              <tr>
+                <td>{{$des->descripcion}}</td>
+                <td>{{$des->emb_inicio}}</td>
+                <td>{{$des->emb_termino}}</td>
+                <td>{{$des->emb_valor}}</td>
+              </tr>
+              @endforeach
             </table>
             </div>                    
           </div>
@@ -372,7 +306,7 @@
           012 y el código sustantivo del Trabajo, por lo cual no serán autorizados descuentos que afecten el mínimo 
           vital del funcionario, una vez efectuados los descuentos de Ley y Órdenes Judiciales.</p>
 
-          <p style="font-size: 13px;">Se expide en Bogotá D.C. al (los) 21 días del mes de Agosto del 2020</p>
+          <p style="font-size: 13px;">Se expide en Bogotá D.C. al (los) {{$fechaLetras}}</p>
 
           <div>
           <p class="lateralFirma">Firmado digitalmente por: MINISTERIO DE DEFENSA NACIONAL <br>

@@ -169,8 +169,8 @@
             <img class= "escudo" src="{{$datosGenerales['logo']}}" alt="Logo" />
           </div>
           <div>
-          <img class="imgCode" src="data:image/png;base64,{{DNS2D::getBarcodePNG('SzJ yAQV feIY Lqe9 9Gfz P7mm 63Y=', 'PDF417')}}" alt="Bacode" />
-          <p class="lateralCode">Identificador : 9SzJ yAQV feIY Lqe9 9Gfz P7mm 63Y= (Válido indefinidamente)<p>
+          <img class="imgCode" src="data:image/png;base64,{{DNS2D::getBarcodePNG($idDocumento, 'PDF417')}}" alt="Bacode" />
+          <p class="lateralCode">Identificador :{{ $idDocumento}} (Válido indefinidamente)<p>
           <h5 style="margin-top: -20%;"></h5>
           <br>
           <h5 style="margin-top: -9%;"> FUERZA AEREA COLOMBIANA</h5>
@@ -180,8 +180,8 @@
           <br>
           <h4 style="margin-top: -4.5%;">HACE CONSTAR</h4>
           <p class="texto">
-            Que el(la) Señor(a)(ita) (grado) (funcion) identificado con CC No. 000000000000. ingresó a FUERZA AEREA COLOMBIANA
-            desde el 06-06-2012 y a la fecha desempeñó los siguientes cargos, así:
+            Que el(la) Señor(a)(ita) {{$dataCC[0]->Apellidos_Nombres}} ({{$dataCC[0]->Grado_Actual}}) ({{$dataCC[0]->Cargo}}) identificado con CC No. {{$dataCC[0]->Identificacion}}. ingresó a FUERZA AEREA COLOMBIANA
+            desde el {{$dataCC[0]->date_ini}} y a la fecha desempeñó los siguientes cargos, así:
           </p>                    
           </div>
 
@@ -193,84 +193,23 @@
               <th>UNIDAD DEPENDENCIA</th>
               <th>INICIO</th>
               <th>TERMINO</th>
-              </tr>     
-              <tr>
-              <td>TA21</td> 
-              <td>TECNICO EN SISTEMAS</td>
-              <td>DIRECCION DE TECNOLOGIAS DE LA INFORMACION ANALISTA DE REQUERIMIENTOS</td>
-              <td>01-02-2013</td>
-              <td>06-06-2016 </td>
               </tr>
-              <tr>
-              <td>TA21</td> 
-              <td>TECNICO EN SISTEMAS</td>
-              <td>DIRECCION DE TECNOLOGIAS DE LA INFORMACION ANALISTA DE REQUERIMIENTOS</td>
-              <td>01-02-2013</td>
-              <td>06-06-2016 </td>
-              </tr>
-              <tr>
-              <td>TA21</td> 
-              <td>TECNICO EN SISTEMAS</td>
-              <td>DIRECCION DE TECNOLOGIAS DE LA INFORMACION ANALISTA DE REQUERIMIENTOS</td>
-              <td>01-02-2013</td>
-              <td>06-06-2016 </td>
-              </tr>
-              <tr>
-              <td>TA21</td> 
-              <td>TECNICO EN SISTEMAS</td>
-              <td>DIRECCION DE TECNOLOGIAS DE LA INFORMACION ANALISTA DE REQUERIMIENTOS</td>
-              <td>01-02-2013</td>
-              <td>06-06-2016 </td>
-              </tr>
-              <tr>
-              <td>TA21</td> 
-              <td>TECNICO EN SISTEMAS</td>
-              <td>DIRECCION DE TECNOLOGIAS DE LA INFORMACION ANALISTA DE REQUERIMIENTOS</td>
-              <td>01-02-2013</td>
-              <td>06-06-2016 </td>
-              </tr>
-              <tr>
-              <td>TA21</td> 
-              <td>TECNICO EN SISTEMAS</td>
-              <td>DIRECCION DE TECNOLOGIAS DE LA INFORMACION ANALISTA DE REQUERIMIENTOS</td>
-              <td>01-02-2013</td>
-              <td>06-06-2016 </td>
-              </tr>
-              <tr>
-              <td>TA21</td> 
-              <td>TECNICO EN SISTEMAS</td>
-              <td>DIRECCION DE TECNOLOGIAS DE LA INFORMACION ANALISTA DE REQUERIMIENTOS</td>
-              <td>01-02-2013</td>
-              <td>06-06-2016 </td>
-              </tr>
-              <tr>
-              <td>TA21</td> 
-              <td>TECNICO EN SISTEMAS</td>
-              <td>DIRECCION DE TECNOLOGIAS DE LA INFORMACION ANALISTA DE REQUERIMIENTOS</td>
-              <td>01-02-2013</td>
-              <td>06-06-2016 </td>
-              </tr>
-              <tr>
-              <td>TA21</td> 
-              <td>TECNICO EN SISTEMAS</td>
-              <td>DIRECCION DE TECNOLOGIAS DE LA INFORMACION ANALISTA DE REQUERIMIENTOS</td>
-              <td>01-02-2013</td>
-              <td>06-06-2016 </td>
-              </tr>
-              <tr>
-              <td>TA21</td> 
-              <td>TECNICO EN SISTEMAS</td>
-              <td>DIRECCION DE TECNOLOGIAS DE LA INFORMACION ANALISTA DE REQUERIMIENTOS</td>
-              <td>01-02-2013</td>
-              <td>06-06-2016 </td>
-              </tr>
-              
+
+              @foreach ($dataCC as $cc)                 
+                <tr>
+                  <td>{{$cc->Grado_Actual}}</td> 
+                  <td>{{$cc->Cargo}}</td>
+                  <td>{{$cc->Dependencia_Cargo}}</td>
+                  <td>{{$cc->date_ini}}</td>
+                  <td>{{$cc->date_fin}}</td>
+                </tr>
+              @endforeach   
               
             </table> 
             <br>                      
           </div>
           <p class="nota">Los datos aquí contenidos son los registros en su historial laboral. Se expide la presente constancia.
-            Dada a los 21 días del mes de agosto de 2020 en la ciudad de Bogotá D.C. Caducidad 30 días a partir de la fecha.</p>
+            Dada a los {{$datosGenerales['fechaLetras']}} en la ciudad de Bogotá D.C. Caducidad 30 días a partir de la fecha.</p>
           <div>
           <p class="lateralFirma">Firmado digitalmente por: MINISTERIO DE DEFENSA NACIONAL <br>
           Organización: <br>
