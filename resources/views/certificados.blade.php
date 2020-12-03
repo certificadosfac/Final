@@ -32,6 +32,16 @@
 </head>
 
 <body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+		<form method="POST" action="{{ route('logout') }}">
+						@csrf
+				<button type="submit " class="btn btn-danger">Cerrar sesión.</button>
+		</form>
+    </div>
+  </div>
+</nav>
 <div class="row" style="margin-left: 80px; margin-right: 80px; margin-top: 30px;">
 	<div class="col-md-4 text-center">
 		<div class="card" style="width: auto;">
