@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 use App\Models\LogDocuments;
 use Illuminate\Database\QueryException;
 use Redirect;
-use ArrayObject;
+
 
 class CertificadosController extends Controller
 {
@@ -84,6 +84,7 @@ class CertificadosController extends Controller
                 $dateCorte = date_format($date, 'd-m-Y');
 
                 //Obtener data
+
                 $dataTiempos = $this->getData($tipoCert);
                 if(!$dataTiempos){
                     return Redirect::back()->withErrors(['No se encontraron datos para los parámetros especificados.']);
@@ -125,6 +126,7 @@ class CertificadosController extends Controller
                 
 
                 //Obtener data
+
                 $dataCC = $this->getData($tipoCert);
                 if(!$dataCC){
                     return Redirect::back()->withErrors(['No se encontraron datos para los parámetros especificados.']);
@@ -159,6 +161,7 @@ class CertificadosController extends Controller
                     'fechaLetras' => $fechaLetras
                 ];
 
+
                 $view =  \View::make('pdf.cargos', compact('datosGenerales','idDocumento','dataCC'))->render();            
                 
             break;
@@ -183,6 +186,7 @@ class CertificadosController extends Controller
                 $mesLetra = $meses[$mes - 1];
 
                 //Obtener data
+
                 $dataPagos = $this->getData($tipoCert, $ano,$mes);                               
                 if( count($dataPagos['devengado']) == 0){
                     return Redirect::back()->withErrors(['No se encontraron datos para los parámetros especificados.']);
@@ -213,6 +217,7 @@ class CertificadosController extends Controller
                     'fotoPie' => $base64Pie
                 ];
 
+
                 $view =  \View::make('pdf.pago', compact('datosGenerales','idDocumento',
                 'dataPagos','fechaLetras','mesLetra','ano'))->render();            
                 
@@ -239,6 +244,7 @@ class CertificadosController extends Controller
                ->first();
 
                if ( $activo->activo == "NO") {
+
                     $dataTiempos = DB::table('facweb_certifica_tiempo_vr')               
                     ->where('cedula', '=', '1007059556')               
                     ->get();
@@ -294,6 +300,7 @@ class CertificadosController extends Controller
 
                
             }
+
 
             break;
             case 'CC';
@@ -383,6 +390,7 @@ class CertificadosController extends Controller
         }      
     }
 
+
     public function mesNumero($mes) {
         $numero = 0;
         switch($mes){
@@ -426,5 +434,6 @@ class CertificadosController extends Controller
         }
         return $numero;
     }
+
 }
  
