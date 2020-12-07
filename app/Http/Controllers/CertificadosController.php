@@ -13,14 +13,29 @@ use Illuminate\Support\Str;
 use App\Models\LogDocuments;
 use Illuminate\Database\QueryException;
 use Redirect;
+use ArrayObject;
+
 
 class CertificadosController extends Controller
 {
     
     public function download(Request $request) 
-    {          
+    {     
+        
+
+        $identificacion = DB::table('fac_certifica_cargos_v')
+               ->select('Identificacion')               
+               ->where('Email', '=', auth()->user()->email)               
+               ->first();
+
+        if(!$identificacion){
+            return Redirect::back()->withErrors(['No se encontraron datos para los parámetros especificados.']);
+        }
+
+        $cedula = $identificacion->Identificacion;
+           
         $tipoCert = $request->input('tipoCert');
- 
+        
         switch($tipoCert){
             case 'UL';
                 //Fecha actual            
@@ -33,12 +48,11 @@ class CertificadosController extends Controller
                 $idDocumento =  Str::random(32);
                 $log = new LogDocuments;
                 $log->token = $idDocumento;
-                $log->cedula = '1007059556';
+                $log->cedula = $cedula;
                 $log->save();
 
                 //Obtener data
-                $data = $this->getData();
-                $cargoData = $this->getData($tipoCert);
+                $cargoData = $this->getData($tipoCert, '','', $cedula);
                 if(!$cargoData){
                     return Redirect::back()->withErrors(['No se encontraron datos para los parámetros especificados.']);
                 }
@@ -78,17 +92,14 @@ class CertificadosController extends Controller
                 $idDocumento =  Str::random(32);
                 $log = new LogDocuments;
                 $log->token = $idDocumento;
-                $log->cedula = '1007059556';
+                $log->cedula = $cedula;
                 $log->save();
 
                 $dateCorte = date_format($date, 'd-m-Y');
 
                 //Obtener data
-<<<<<<< HEAD
-=======
-                $data = $this->getData();
->>>>>>> crud
-                $dataTiempos = $this->getData($tipoCert);
+
+                $dataTiempos = $this->getData($tipoCert, '', '', $cedula);
                 if(!$dataTiempos){
                     return Redirect::back()->withErrors(['No se encontraron datos para los parámetros especificados.']);
                 }
@@ -129,11 +140,8 @@ class CertificadosController extends Controller
                 
 
                 //Obtener data
-<<<<<<< HEAD
-=======
-                $data = $this->getData();
->>>>>>> crud
-                $dataCC = $this->getData($tipoCert);
+
+                $dataCC = $this->getData($tipoCert,'','',$cedula);
                 if(!$dataCC){
                     return Redirect::back()->withErrors(['No se encontraron datos para los parámetros especificados.']);
                 }
@@ -143,7 +151,7 @@ class CertificadosController extends Controller
                 $idDocumento =  Str::random(32);
                 $log = new LogDocuments;
                 $log->token = $idDocumento;
-                $log->cedula = '1007059556';
+                $log->cedula = $cedula;
                 $log->save();
                 
                 
@@ -167,10 +175,7 @@ class CertificadosController extends Controller
                     'fechaLetras' => $fechaLetras
                 ];
 
-<<<<<<< HEAD
-=======
-                $view =  \View::make('pdf.cargos', compact('datosGenerales'))->render();            
->>>>>>> crud
+
                 $view =  \View::make('pdf.cargos', compact('datosGenerales','idDocumento','dataCC'))->render();            
                 
             break;
@@ -195,11 +200,8 @@ class CertificadosController extends Controller
                 $mesLetra = $meses[$mes - 1];
 
                 //Obtener data
-<<<<<<< HEAD
-=======
-                $data = $this->getData();
->>>>>>> crud
-                $dataPagos = $this->getData($tipoCert, $ano,$mes);                               
+
+                $dataPagos = $this->getData($tipoCert, $ano,$mes,$cedula);                               
                 if( count($dataPagos['devengado']) == 0){
                     return Redirect::back()->withErrors(['No se encontraron datos para los parámetros especificados.']);
                 }
@@ -208,7 +210,7 @@ class CertificadosController extends Controller
                 $idDocumento =  Str::random(32);
                 $log = new LogDocuments;
                 $log->token = $idDocumento;
-                $log->cedula = '1007059556';
+                $log->cedula = $cedula;
                 $log->save();
                 
                 //Cargar logo
@@ -229,11 +231,7 @@ class CertificadosController extends Controller
                     'fotoPie' => $base64Pie
                 ];
 
-<<<<<<< HEAD
-=======
-                $view =  \View::make('pdf.pago', compact('datosGenerales'))->render();            
-                $view =  \View::make('pdf.pago', compact('datosGenerales','idDocumento','dataPagos'))->render();            
->>>>>>> crud
+
                 $view =  \View::make('pdf.pago', compact('datosGenerales','idDocumento',
                 'dataPagos','fechaLetras','mesLetra','ano'))->render();            
                 
@@ -245,39 +243,28 @@ class CertificadosController extends Controller
         $pdf->loadHTML($view)->setPaper('letter');
         return $pdf->download('archivo.pdf');
     }
-    public function getData($tipoCert, $ano = '', $mes = '') 
+    public function getData($tipoCert, $ano = '', $mes = '',$cedula) 
     {
-<<<<<<< HEAD
-=======
-        $data =  [
-            'quantity'      => '1' ,
-            'description'   => 'some ramdom text',
-            'price'   => '500',
-            'total'     => '500'
-        ];
-    public function getData($tipoCert, $ano = '', $mes = '') 
-    {
->>>>>>> crud
         switch($tipoCert){
             case 'UL';
                $data = DB::table('facweb_certifica_laboral_v1')               
-                ->where('cedula', '=', '1007059556')               
+                ->where('cedula', '=', $cedula)               
                 ->first();
             break;
             case 'CT';
                $activo = DB::table('facweb_personal_v')
                ->select('activo')               
-               ->where('cedula', '=', '1007059556')               
+               ->where('cedula', '=', $cedula)               
                ->first();
 
                if ( $activo->activo == "NO") {
-<<<<<<< HEAD
+
                     $dataTiempos = DB::table('facweb_certifica_tiempo_vr')               
-                    ->where('cedula', '=', '1007059556')               
+                    ->where('cedula', '=', $cedula)               
                     ->get();
                }else{
                     $dataTiempos = DB::table('facweb_certifica_tiempo_v1')               
-                    ->where('cedula', '=', '1007059556')               
+                    ->where('cedula', '=', $cedula)               
                     ->get();
                }
 
@@ -328,42 +315,32 @@ class CertificadosController extends Controller
                
             }
 
-=======
-                    $data = DB::table('facweb_certifica_tiempo_vr')               
-                    ->where('cedula', '=', '1007059556')               
-                    ->first();
-               }else{
-                    $data = DB::table('facweb_certifica_tiempo_v1')               
-                    ->where('cedula', '=', '1007059556')               
-                    ->first();
-               }
 
->>>>>>> crud
             break;
             case 'CC';
                $data = DB::table('fac_certifica_cargos_v as c')
                ->select('c.*',DB::raw("DATE_FORMAT(c.Fecha_Termino, '%d-%m-%Y') as date_fin"),
                DB::raw("DATE_FORMAT(c.Fecha_Inicio, '%d-%m-%Y') as date_ini"))              
-                ->where('identificacion', '=', '1007059556')
+                ->where('identificacion', '=', $cedula)
                 ->orderBy('Fecha_Inicio', 'asc')               
                 ->get();
                                 
             break;
             case 'CP';
                $descuentos = DB::table('facweb_haberes_descuentos')               
-                ->where('identificacion', '=', '1007059556')               
+                ->where('identificacion', '=', $cedula)               
                 ->get();
                 $devengado = DB::table('facweb_haberes_devengado as dev')                
                 ->join('facweb_haberes_descuentos as des', 'dev.cc', '=', 'des.identificacion')
                 ->select('dev.abreviatura','dev.porcentaje','dev.valor_dev',
                 'des.arb','des.id_tipo_descuento','des.desc_ini','des.desc_ter',
                 'des.valor_desc','dev.nombres_apellidos','dev.cc','dev.codigo_militar')             
-                ->where('dev.cc', '=', '1007059556')
+                ->where('dev.cc', '=', $cedula)
                 ->where('dev.ano_nomina', '=', $ano)
                 ->where('dev.mes_nomina', '=', $mes)               
                 ->get();
                 $embargo = DB::table('facweb_haberes_embargo')               
-                ->where('identificacion', '=', '1007059556') 
+                ->where('identificacion', '=', $cedula) 
                 ->where('ano_nomina', '=', $ano)
                 ->where('mes_nomina', '=', $mes)               
                 ->get();
@@ -426,7 +403,7 @@ class CertificadosController extends Controller
             exit;            
         }      
     }
-<<<<<<< HEAD
+
 
     public function mesNumero($mes) {
         $numero = 0;
@@ -471,7 +448,6 @@ class CertificadosController extends Controller
         }
         return $numero;
     }
-=======
->>>>>>> crud
+
 }
  

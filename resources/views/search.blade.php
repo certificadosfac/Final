@@ -13,10 +13,8 @@
         font: normal 14px Roboto,arial,sans-serif;
         }
 
-        .container {
-            padding: 12%;
-            position: relative;
-            left:13%;
+        .container {            
+            position: fixed;           
         }
 
         .form-login {
@@ -45,9 +43,15 @@
         .wrapper {
             text-align: center;
         }
+
+        .contenido{
+            margin-left: 35%;
+            margin-top: 22%;
+        }
      
 				
 	</style>
+    <header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(images/img_bg_2.jpg);height: 969px; background-size:cover;">
 </head>
 
 <body>
@@ -61,7 +65,6 @@
             </div>        
         </div>
     </div>
-</div>
 </div>
 </body>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
