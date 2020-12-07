@@ -107,7 +107,7 @@
         </a>
         <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{url('/contact')}}">Listar</a>
+            <a class="collapse-item" href="{{url('/Admin/usuarios/list')}}">Listar</a>
           </div>
         </div>
       </li>

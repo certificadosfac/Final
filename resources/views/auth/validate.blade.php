@@ -27,7 +27,7 @@
                                                     </div>
                                                 </div>
                                                 <label for="captcha">Captcha</label>
-                                                    <!-- <div class="g-recaptcha" data-sitekey="6LesS_EZAAAAAJz6io-lt1-TbHxkL4KqcMPCe8_u"></div> -->
+                                                    <div class="g-recaptcha" data-sitekey="6LesS_EZAAAAAJz6io-lt1-TbHxkL4KqcMPCe8_u"></div>
                                                 <br>
                                                 <button class="btn btn-primary btn-block" type="submit">Enviar Correo</button>
                                             </form>	
@@ -43,4 +43,11 @@
 			</div>
 		</div>
 </header>
+@section('scriptsFotter')
+<script type="text/javascript">
+	if({{$errors->any()}}){
+		swal("{{$errors->first('title')}}", "{{$errors->first('text')}}", "{{$errors->first('button')}}");
+	}	
+</script>
+@endsection
 </x-guest-layout>

@@ -41,7 +41,7 @@ class MailController extends Controller
         if (isset($validar)) {
             return Redirect::back()->withErrors([
             'title' => 'Aviso',
-            'button' => 'success',
+            'button' => 'info',
             'text' => 'El usuario ya se encuentra registrado',
             ]);
         }

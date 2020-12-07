@@ -50,7 +50,8 @@ Route::get('/admin', function () {
 
 Route::post('/download', [CertificadosController::class, 'download'])->name('download');
 
-
+Route::get('/Admin/usuarios/list', [CargoController::class, 'listuser'])->name('Llistuser');
+Route::get('/Admin/usuarios/buscar', [CargoController::class, 'buscaru'])->name('buscaru');
 //*************************Cargo***********************||
 Route::get('/Admin/Cargo/listar', [CargoController::class, 'list'])->name('Clist');
 Route::get('/Admin/Cargo/crear', [CargoController::class, 'create'])->name('Ccreate');

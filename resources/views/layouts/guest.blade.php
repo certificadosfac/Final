@@ -50,9 +50,6 @@
     </div>
 </body>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script type="text/javascript">
-	if({{$errors->any()}}){
-		swal("{{$errors->first('title')}}", "{{$errors->first('text')}}", "{{$errors->first('button')}}");
-	}	
-</script>
+@yield('scriptsFotter')
+
 </html>
