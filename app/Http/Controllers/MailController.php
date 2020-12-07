@@ -25,7 +25,11 @@ class MailController extends Controller
 
         $Iemail = DB::table('fac_certifica_cargos_v')->where('identificacion', $request->cedula)->value('Email');
         if (!isset($Iemail)) {
-            return Redirect::back()->withErrors(['El usuario no se encuentra registrado']);
+            return Redirect::back()->withErrors([
+                'title' => 'Aviso',
+                'button' => 'info',
+                'text' => 'El Usuario no se Encuentra Registrado en la aplicacion',
+                ]);
         }
         $Pemail = DB::table('fac_certifica_cargos_v')->where('identificacion', $request->cedula)->value('Email_Institucional');
         // campo validacion
@@ -35,7 +39,11 @@ class MailController extends Controller
         $validar = User::where('email',$Iemail)->first();
 
         if (isset($validar)) {
-            return Redirect::back()->withErrors(['El usuario ya se encuentra registrado']);
+            return Redirect::back()->withErrors([
+            'title' => 'Aviso',
+            'button' => 'success',
+            'text' => 'El usuario ya se encuentra registrado',
+            ]);
         }
         $usuario = new User;
         $usuario->name = $nombre;
@@ -47,7 +55,11 @@ class MailController extends Controller
         Mail::to($Iemail)->send(new EmailContacto($str));
 
     
-        return Redirect::back()->withErrors(['Usuario Creado Exitosamente Validar Correo']);
+        return Redirect::back()->withErrors([
+            'title' => 'Aviso',
+            'button' => 'success',
+            'text' => 'creado correctamente',
+            ]);
 
     }
 }

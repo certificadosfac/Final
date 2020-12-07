@@ -7,9 +7,6 @@
 					<div class="row row-mt-15em">
 						<div class="col-md-7 mt-text animate-box" data-animate-effect="fadeInUp">
 							<h1>Certificados</h1>
-							@error('title')
-								<div class="alert alert-danger">{{ $message }}</div>
-							@enderror
 						</div>
 						<div class="col-md-4 col-md-push-1 animate-box" data-animate-effect="fadeInRight">
 							<div class="form-wrap">
@@ -19,7 +16,7 @@
 											<div class="col-md-6"><h3>Registre </div><div class="col-md-6"><img src="{{ url('images/logoF.png')}}" width="100%" height="80%"></h3></div>
                                             
 											<form onsubmit="return enviarMensaje()" method="POST" action="{{ route('email') }}" >
-										
+											
                                                 {{  csrf_field() }}
                                                 <div class="row form-group"> 		
                                                 <div class="row form-group">
@@ -30,7 +27,7 @@
                                                     </div>
                                                 </div>
                                                 <label for="captcha">Captcha</label>
-                                                    <div class="g-recaptcha" data-sitekey="6LesS_EZAAAAAJz6io-lt1-TbHxkL4KqcMPCe8_u"></div>
+                                                    <!-- <div class="g-recaptcha" data-sitekey="6LesS_EZAAAAAJz6io-lt1-TbHxkL4KqcMPCe8_u"></div> -->
                                                 <br>
                                                 <button class="btn btn-primary btn-block" type="submit">Enviar Correo</button>
                                             </form>	

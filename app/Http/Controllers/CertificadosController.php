@@ -13,10 +13,6 @@ use Illuminate\Support\Str;
 use App\Models\LogDocuments;
 use Illuminate\Database\QueryException;
 use Redirect;
-<<<<<<< HEAD
-use ArrayObject;
-=======
->>>>>>> crud
 
 class CertificadosController extends Controller
 {
@@ -24,7 +20,7 @@ class CertificadosController extends Controller
     public function download(Request $request) 
     {          
         $tipoCert = $request->input('tipoCert');
-        
+ 
         switch($tipoCert){
             case 'UL';
                 //Fecha actual            
@@ -41,10 +37,7 @@ class CertificadosController extends Controller
                 $log->save();
 
                 //Obtener data
-<<<<<<< HEAD
-=======
                 $data = $this->getData();
->>>>>>> crud
                 $cargoData = $this->getData($tipoCert);
                 if(!$cargoData){
                     return Redirect::back()->withErrors(['No se encontraron datos para los parámetros especificados.']);
