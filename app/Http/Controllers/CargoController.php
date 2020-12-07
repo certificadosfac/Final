@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\cargo;
+use App\Models\User;
+
 
 class CargoController extends Controller
 
@@ -175,5 +177,26 @@ class CargoController extends Controller
          return redirect('/Admin/Cargo/listar');
 
     }
+
+    public function listuser()
+
+    {
+
+        $users=User::paginate(15);
+        return view('listuser',['users'=>$users]);
+
+    }
+
+    public function buscaru(Request $request)
+
+    {
+        
+        $email = $request->email;
+        
+        $users = User::search($email)->paginate(15);
+        return view('listuser',['users'=>$users]);
+
+    }
+
 
 }

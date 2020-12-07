@@ -97,7 +97,7 @@
             <div class="card mb-4 py-3 border-bottom-secondary">
             <div class="card-body">
                     <h2>Usuarios</h2>
-                    <a href="#" class="btn btn-primary btn-icon-split">
+                    <a href="{{ url('/Admin/usuarios/list') }}" class="btn btn-primary btn-icon-split">
                         <span class="icon text-white-50">
                             <i class="fas fa-flag"></i>
                         </span>
