@@ -14,6 +14,10 @@ use App\Models\LogDocuments;
 use Illuminate\Database\QueryException;
 use Redirect;
 use ArrayObject;
+use App\Models\laboral;
+use App\Models\cargo;
+use App\Models\pago;
+use App\Models\tiempo;
 
 
 class CertificadosController extends Controller
@@ -59,12 +63,24 @@ class CertificadosController extends Controller
                 
                 
                 //Cargar firma
-                $path = storage_path('app\img\img_firma.jpg');
+                $url = laboral::where('tipo', '=', 'firma')->first();                
+                if($url){
+                    $path = public_path() . '/storage/laboral/'. $url->url;
+                }else{
+                    $path = storage_path('app\img\img_firma.jpg');
+                }
+                
                 $data = file_get_contents($path);
                 $base64Firma = 'data:image/' . 'jpg' . ';base64,' . base64_encode($data);
 
                 //Cargar logo
-                $path = storage_path('app\img\Escudo_Fac.jpg');
+                $url = laboral::where('tipo', '=', 'logo')->first();
+                if($url){
+                    $path = public_path() . '/storage/laboral/'. $url->url;
+                }else{
+                    $path = storage_path('app\img\Escudo_Fac.jpg');
+                }
+                
                 $data = file_get_contents($path);
                 $base64Logo = 'data:image/' . 'jpg' . ';base64,' . base64_encode($data);
 
@@ -105,15 +121,26 @@ class CertificadosController extends Controller
                 }
                
                
-                //Cargar logo
-                $path = storage_path('app\img\Escudo_Fac.jpg');
+               //Cargar firma
+               $url = tiempo::where('tipo', '=', 'firma')->first();                
+               if($url){
+                   $path = public_path() . '/storage/tiempo/'. $url->url;
+               }else{
+                   $path = storage_path('app\img\img_firma.jpg');
+               }
+               
+               $data = file_get_contents($path);
+               $base64Pie = 'data:image/' . 'jpg' . ';base64,' . base64_encode($data);
+
+               //Cargar logo
+               $url = tiempo::where('tipo', '=', 'logo')->first();
+               if($url){
+                   $path = public_path() . '/storage/tiempo/'. $url->url;
+               }else{
+                   $path = storage_path('app\img\Escudo_Fac.jpg');
+               }
                 $data = file_get_contents($path);
                 $base64Logo = 'data:image/' . 'jpg' . ';base64,' . base64_encode($data);
-
-                //Cargar foto de pie de pagina
-                $path = storage_path('app\img\fac.png');
-                $data = file_get_contents($path);
-                $base64Pie = 'data:image/' . 'jpg' . ';base64,' . base64_encode($data);
 
                 
                 \Storage::disk('public')->put('test.png',base64_decode(\DNS2D::getBarcodePNG("4", "PDF417")));
@@ -155,15 +182,26 @@ class CertificadosController extends Controller
                 $log->save();
                 
                 
-                //Cargar logo
-                $path = storage_path('app\img\Escudo_Fac.jpg');
+                //Cargar firma
+               $url = cargo::where('tipo', '=', 'firma')->first();                
+               if($url){
+                   $path = public_path() . '/storage/cargo/'. $url->url;
+               }else{
+                   $path = storage_path('app\img\img_firma.jpg');
+               }
+               
+               $data = file_get_contents($path);
+               $base64Firma = 'data:image/' . 'jpg' . ';base64,' . base64_encode($data);
+
+               //Cargar logo
+               $url = cargo::where('tipo', '=', 'logo')->first();
+               if($url){
+                   $path = public_path() . '/storage/cargo/'. $url->url;
+               }else{
+                   $path = storage_path('app\img\Escudo_Fac.jpg');
+               }
                 $data = file_get_contents($path);
                 $base64Logo = 'data:image/' . 'jpg' . ';base64,' . base64_encode($data);
-
-                //Cargar foto de pie de pagina
-                $path = storage_path('app\img\fac.png');
-                $data = file_get_contents($path);
-                $base64Pie = 'data:image/' . 'jpg' . ';base64,' . base64_encode($data);
 
                 
                 \Storage::disk('public')->put('test.png',base64_decode(\DNS2D::getBarcodePNG("4", "PDF417")));
@@ -171,7 +209,7 @@ class CertificadosController extends Controller
                 $datosGenerales = [                   
                     'logo'   => $base64Logo,                    
                     'fechaActual' => $date,
-                    'fotoPie' => $base64Pie,
+                    'fotoPie' => $base64Firma,
                     'fechaLetras' => $fechaLetras
                 ];
 
@@ -213,22 +251,33 @@ class CertificadosController extends Controller
                 $log->cedula = $cedula;
                 $log->save();
                 
-                //Cargar logo
-                $path = storage_path('app\img\Escudo_Fac.jpg');
+                //Cargar firma
+               $url = pago::where('tipo', '=', 'firma')->first();                
+               if($url){
+                   $path = public_path() . '/storage/pago/'. $url->url;
+               }else{
+                   $path = storage_path('app\img\img_firma.jpg');
+               }
+               
+               $data = file_get_contents($path);
+               $base64Firma = 'data:image/' . 'jpg' . ';base64,' . base64_encode($data);
+
+               //Cargar logo
+               $url = pago::where('tipo', '=', 'logo')->first();
+               if($url){
+                   $path = public_path() . '/storage/pago/'. $url->url;
+               }else{
+                   $path = storage_path('app\img\Escudo_Fac.jpg');
+               }
                 $data = file_get_contents($path);
                 $base64Logo = 'data:image/' . 'jpg' . ';base64,' . base64_encode($data);
-
-                //Cargar foto de pie de pagina
-                $path = storage_path('app\img\fac.png');
-                $data = file_get_contents($path);
-                $base64Pie = 'data:image/' . 'jpg' . ';base64,' . base64_encode($data);
 
                 \Storage::disk('public')->put('test.png',base64_decode(\DNS2D::getBarcodePNG("4", "PDF417")));
 
                 $datosGenerales = [                   
                     'logo'   => $base64Logo,
                     'fechaActual' => $date,
-                    'fotoPie' => $base64Pie
+                    'fotoPie' => $base64Firma
                 ];
 
 
