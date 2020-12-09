@@ -18,6 +18,7 @@ class LogDocuments extends Model
         'cedula',
         'created_at',
         'updated_at',
+        'descripcion',
     ];
 
     

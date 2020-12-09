@@ -24,6 +24,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/log/css/owl.theme.default.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/log/css/style.css')}}">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
 
 
@@ -37,8 +39,32 @@
                 return true;
             }
         }
-    </script>
 
+        function onKeyUp(event) {
+        var keycode = event.keyCode;
+        var action = window.location.origin + '/search_document/' + $('input:text[name=search]').val()
+        
+        if(keycode == '13'){     
+        $.ajax({
+                url: action,
+                dataType: 'json',
+                type: 'GET',
+                success: function (response) {
+
+                    var result = response;
+
+                    if (result.error == "1") {
+                        swal("Error!", result.msn, "error");
+                    }else{
+                        swal("Correcto!", result.msn, "success");                   
+                    }
+                },
+            
+            }); 
+        }
+    }	
+    </script>
+    
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
 
@@ -49,7 +75,7 @@
         {{ $slot }}
     </div>
 </body>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 @yield('scriptsFotter')
 
 </html>

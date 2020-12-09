@@ -53,6 +53,7 @@ class CertificadosController extends Controller
                 $log = new LogDocuments;
                 $log->token = $idDocumento;
                 $log->cedula = $cedula;
+                $log->descripcion = 'unidad laboral';
                 $log->save();
 
                 //Obtener data
@@ -109,6 +110,7 @@ class CertificadosController extends Controller
                 $log = new LogDocuments;
                 $log->token = $idDocumento;
                 $log->cedula = $cedula;
+                $log->descripcion = 'tiempos';
                 $log->save();
 
                 $dateCorte = date_format($date, 'd-m-Y');
@@ -179,6 +181,7 @@ class CertificadosController extends Controller
                 $log = new LogDocuments;
                 $log->token = $idDocumento;
                 $log->cedula = $cedula;
+                $log->descripcion = 'cargos';
                 $log->save();
                 
                 
@@ -249,6 +252,7 @@ class CertificadosController extends Controller
                 $log = new LogDocuments;
                 $log->token = $idDocumento;
                 $log->cedula = $cedula;
+                $log->descripcion = 'desprendible de pagos';
                 $log->save();
                 
                 //Cargar firma
@@ -425,7 +429,7 @@ class CertificadosController extends Controller
             if ($doc) { 
                 $response = array(
                     'error' => '0',
-                    'msn' => 'Este certificado pertenece al documento: '.$doc->cedula
+                    'msn' => 'Validación exitosa, este certificado pertenece al documento numero CC:'.$doc->cedula. ' fecha de generación :'. $doc->created_at. ', certificado de '. $doc->descripcion
                 );        
                 echo json_encode($response);
                 exit;
