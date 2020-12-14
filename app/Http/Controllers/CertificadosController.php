@@ -226,6 +226,7 @@ class CertificadosController extends Controller
             $rules = [
                 'mes' => 'required',
                 'ano' => 'required',
+                'tnomina' =>'required'
             ];
             $this->validate($request, $rules);
            
@@ -238,11 +239,12 @@ class CertificadosController extends Controller
 
                 $ano = $request->input('ano');
                 $mes = $request->input('mes');
+                $tnomina = $request->input('tnomina');
                 $mesLetra = $meses[$mes - 1];
 
                 //Obtener data
 
-                $dataPagos = $this->getData($tipoCert, $ano,$mes,$cedula);                               
+                $dataPagos = $this->getData($tipoCert, $ano,$mes,$cedula, $tnomina);                               
                 if( count($dataPagos['devengado']) == 0){
                     return Redirect::back()->withErrors(['No se encontraron datos para los parámetros especificados.']);
                 }
@@ -296,7 +298,7 @@ class CertificadosController extends Controller
         $pdf->loadHTML($view)->setPaper('letter');
         return $pdf->download('archivo.pdf');
     }
-    public function getData($tipoCert, $ano = '', $mes = '',$cedula) 
+    public function getData($tipoCert, $ano = '', $mes = '',$cedula, $tnomina = '') 
     {
         switch($tipoCert){
             case 'UL';
@@ -381,7 +383,8 @@ class CertificadosController extends Controller
             break;
             case 'CP';
                $descuentos = DB::table('facweb_haberes_descuentos')               
-                ->where('identificacion', '=', $cedula)               
+                ->where('identificacion', '=', $cedula)
+                ->where('tipo_nomina', '=', $tnomina)               
                 ->get();
                 $devengado = DB::table('facweb_haberes_devengado as dev')                
                 ->join('facweb_haberes_descuentos as des', 'dev.cc', '=', 'des.identificacion')
@@ -390,15 +393,16 @@ class CertificadosController extends Controller
                 'des.valor_desc','dev.nombres_apellidos','dev.cc','dev.codigo_militar')             
                 ->where('dev.cc', '=', $cedula)
                 ->where('dev.ano_nomina', '=', $ano)
-                ->where('dev.mes_nomina', '=', $mes)               
+                ->where('dev.mes_nomina', '=', $mes) 
+                ->where('dev.tipo_nomina', '=', $tnomina)              
                 ->get();
                 $embargo = DB::table('facweb_haberes_embargo')               
                 ->where('identificacion', '=', $cedula) 
                 ->where('ano_nomina', '=', $ano)
-                ->where('mes_nomina', '=', $mes)               
+                ->where('mes_nomina', '=', $mes) 
+                ->where('tipo_nomina', '=', $tnomina)              
                 ->get();
-                //dd($devengado);
-                
+                               
                 $totaDevengado = 0;
                 $totalDescuentos = 0;
                 if (count($devengado) > 0) {

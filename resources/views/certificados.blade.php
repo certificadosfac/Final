@@ -129,7 +129,7 @@
 					<option value="11">Noviembre</option>
 					<option value="12">Diciembre</option>
 				</select>				
-			</div>
+			</div>			
 			<div class="form-group">
 				<label for="message-text" class="col-form-label">Año:</label>
 				<select class="form-control" name="ano" id="ano">
@@ -142,7 +142,19 @@
                     
                     ?>					
 				</select>
-			</div>		
+			</div>
+			<div class="form-group">
+			<label for="recipient-name" class="col-form-label">Tipo Nómina:</label>				
+				<select class="form-control" name="tnomina" id="tnomina">
+					<option value="1">NOMINA MENSUAL</option>
+					<option value="2">PRIMA DE SERVICIO</option>
+					<option value="3">PRIMA DE NAVIDAD</option>
+					<option value="4">RETROACTIVO</option>
+					<option value="5">ADICIONAL</option>
+					<option value="6">ADICIONAL VIGENCIA ACTUAL</option>
+					<option value="7">ADICIONAL VIGENCIA EXPIRADA</option>
+				</select>	
+			</div>				
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
