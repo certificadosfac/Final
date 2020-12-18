@@ -1,34 +1,49 @@
 <x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
+<header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(images/img_bg_2.jpg);height: 969px;">
+		<div class="overlay"></div>
+		<div class="gtco-container">
+			<div class="row">
+				<div class="col-md-12 col-md-offset-0 text-left">
+					<div class="row row-mt-15em">
+						<div class="col-md-7 mt-text animate-box" data-animate-effect="fadeInUp">
+							<h1>Certificados</h1> 
+						</div>
+						<div class="col-md-4 col-md-push-1 animate-box" data-animate-effect="fadeInRight">
+							<div class="form-wrap">
+								<div class="tab">
+									<div class="tab-content">
+										<div class="tab-content-inner active" data-content="signup">
+											<div class="col-md-6"><h3>Recuperar Contraseña </div><div class="col-md-6"><img src="{{ url('images/logoF.png')}}" width="100%" height="80%"></h3></div>
+                                            <form method="POST" action="{{ route('password.email') }}">
+                                                @csrf
+                                                <div class="row form-group"> 		
+                                                <div class="row form-group {{ $errors->has('email')? 'has-error' : ''}}">
+                                                    <div class="col-md-12">
+                                                        <label  for="email" value="{{ __('Email') }}">Correo</label>
+                                                        <x-jet-input id="email" class="form-control" type="email" name="email" :value="old('email')" required autofocus />
+                                                        {!! $errors->first('email','<span class="help-block">:message</span> ')!!} 
+														@if (session('status'))
+														<div class="help-block">
+															{{ session('status') }}
+														</div>
+                                            			@endif
+							
+                                                    </div>
+                                                </div>
+						
+												<button class="btn btn-primary btn-block" type="submit">Restablecer Contraseña</button>
+                                                <br>
+                                                 
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-        </div>
-
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
-        @endif
-
-        <x-jet-validation-errors class="mb-4" />
-
-        <form method="POST" action="{{ route('password.email') }}">
-            @csrf
-
-            <div class="block">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-jet-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-jet-button>
-            </div>
-        </form>
-    </x-jet-authentication-card>
+											</form>	
+										</div>		
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+</header>
 </x-guest-layout>

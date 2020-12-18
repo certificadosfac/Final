@@ -34,7 +34,10 @@
                                                 </div>
                                                 <label for="captcha">Captcha</label>
                                                     <div class="g-recaptcha" data-sitekey="6LesS_EZAAAAAJz6io-lt1-TbHxkL4KqcMPCe8_u"></div>
-                                                <br>
+								
+												<a href="{{ url('forgot-password')}}"  style="color:blue; margin-left:70px; text-decoration: underline;" >Recuperar Contraseña</a>
+												<br>
+												<br>
 												<button class="btn btn-primary btn-block" type="submit">Acceder</button>
 												<a class="btn btn-primary btn-block" href="{{ url('validate')}}" style="color:white">Validar</a>
 												<a class="btn btn-primary btn-block" href="{{ url('search')}}" style="color:white">Validar Autenticidad</a>

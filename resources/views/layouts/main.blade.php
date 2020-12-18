@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Fuerza Aerea</title>
+  <title>Fuerza Aérea Colombiana</title>
 
   <!-- Custom fonts for this template-->
   <script src="{{ asset('/main/js/jquery-3.5.1.js') }}" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
